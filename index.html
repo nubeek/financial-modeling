@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en" data-defer-carousel="true" data-page-load="pending">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wefranch — The Compliant Way to Model Possible Earnings</title>
+
+    <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/x96.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/favicon/x192.png" />
+    <link rel="manifest" href="assets/favicon/manifest.json" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <!-- ===================== NAVIGATION ===================== -->
+    <header class="site-header">
+      <div class="nav">
+        <a class="brand" href="#" aria-label="Wefranch home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="24"
+              viewBox="0 0 16 24"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                fill="currentColor"
+                d="M14.635,7.004 L8.355,7.004 C7.608,7.004 7.003,7.610 7.003,8.358 L7.003,22.628 C7.003,23.375 6.397,23.981 5.650,23.981 L1.381,23.981 C0.634,23.981 0.028,23.375 0.028,22.628 L0.028,7.857 L0.028,4.180 C0.028,1.884 1.514,0.024 3.810,0.024 L8.005,0.024 L14.635,0.024 C15.382,0.024 15.988,0.629 15.988,1.376 L15.988,5.650 C15.988,6.399 15.382,7.004 14.635,7.004 ZM14.328,9.296 C14.911,8.649 15.982,9.060 15.982,9.930 L15.982,15.052 C15.982,15.576 15.558,16.001 15.034,16.001 L9.984,16.001 C9.162,16.001 8.729,15.028 9.278,14.418 L14.328,9.296 Z"
+              />
+            </svg>
+          </span>
+          <span class="brand__name">wefranch</span>
+        </a>
+
+        <div class="nav__center">
+          <nav class="nav__links" aria-label="Primary">
+            <a href="#">Franchisors <span class="nav__chevron" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none"><path fill-rule="evenodd" opacity="0.4" fill="rgb(1, 0, 0)" d="M12.437,1.682 L11.023,0.253 L6.438,4.885 L1.852,0.253 L0.438,1.682 L6.438,7.744 L12.437,1.682 Z"/></svg></span></a>
+            <a href="#">Franchisees <span class="nav__chevron" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none"><path fill-rule="evenodd" opacity="0.4" fill="rgb(1, 0, 0)" d="M12.437,1.682 L11.023,0.253 L6.438,4.885 L1.852,0.253 L0.438,1.682 L6.438,7.744 L12.437,1.682 Z"/></svg></span></a>
+            <a href="#">Concepts</a>
+            <a href="#">Reviews</a>
+            <a href="#">Resources <span class="nav__chevron" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none"><path fill-rule="evenodd" opacity="0.4" fill="rgb(1, 0, 0)" d="M12.437,1.682 L11.023,0.253 L6.438,4.885 L1.852,0.253 L0.438,1.682 L6.438,7.744 L12.437,1.682 Z"/></svg></span></a>
+          </nav>
+        </div>
+
+        <div class="nav__actions">
+          <a class="nav__auth" href="#">Sign in</a>
+          <span class="nav__divider" aria-hidden="true"></span>
+          <a class="nav__auth" href="#">Sign up</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ===================== HERO ===================== -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero__intro">
+            <h1 class="hero__title">
+              Finally, The Compliant Way <em>for</em><br />
+              <strong>Franchisees</strong> <em>to</em> <strong>Model Possible Earnings</strong>
+            </h1>
+
+            <div class="hero__lead">
+              <p class="p2">
+                We help prospective franchisees build pro-forma financial models<br />
+                to make better informed and faster franchise buying decisions.
+              </p>
+              <a class="btn btn--primary" href="#problem">Learn more</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero carousel: fixed-width slides, bottom-aligned -->
+        <div class="hero__carousel-wrap">
+          <div class="carousel">
+            <!-- Spreadsheet / table -->
+            <div
+              class="carousel__slide carousel__slide--table card"
+              aria-label="Initial investment cost table with Low, Mid, High and Effective scenarios"
+            >
+              <div class="model-table">
+                <div class="model-table__scale">
+                  <table class="model-table__grid">
+                    <thead>
+                      <tr>
+                        <th class="col-label">
+                          <span class="title">Initial Investments (Input Costs)</span>
+                        </th>
+                        <th class="col-unit"></th>
+                        <th class="col-scenario">Low</th>
+                        <th class="col-scenario">Mid</th>
+                        <th class="col-scenario">High</th>
+                        <th class="col-scenario">Effective</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="label">Development Fee</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">0</td>
+                        <td class="value">0</td>
+                        <td class="value">0</td>
+                        <td class="value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Franchise Fee</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">30,000</td>
+                        <td class="value">30,000</td>
+                        <td class="value assumption">30,000</td>
+                        <td class="value">30,000</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Training Expenses</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">200</td>
+                        <td class="value">250</td>
+                        <td class="value assumption">300</td>
+                        <td class="value">250</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Client Account Purchases</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">0</td>
+                        <td class="value">0</td>
+                        <td class="value assumption">1,050,000</td>
+                        <td class="value">0</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Leasehold Improvements and Deposits</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">0</td>
+                        <td class="value">750</td>
+                        <td class="value assumption">1,500</td>
+                        <td class="value">750</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Furniture, Fixtures and Equipment</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">0</td>
+                        <td class="value">500</td>
+                        <td class="value assumption">1,000</td>
+                        <td class="value">500</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Office Rent and Utilities (1 Month)</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">0</td>
+                        <td class="value">1,000</td>
+                        <td class="value assumption">2,000</td>
+                        <td class="value">1,000</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Office Equipment, Computer Hardware</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">2,600</td>
+                        <td class="value">4,550</td>
+                        <td class="value assumption">6,500</td>
+                        <td class="value">4,550</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Initial Launch Marketing</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">3,000</td>
+                        <td class="value">3,000</td>
+                        <td class="value assumption">3,000</td>
+                        <td class="value">3,000</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Insurance</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">500</td>
+                        <td class="value">1,000</td>
+                        <td class="value assumption">1,500</td>
+                        <td class="value">1,000</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Additional Funds (3 Months)</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">23,750</td>
+                        <td class="value">31,250</td>
+                        <td class="value assumption">38,750</td>
+                        <td class="value">31,250</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Licenses &amp; Permits</td>
+                        <td class="col-unit"></td>
+                        <td class="value"></td>
+                        <td class="value"></td>
+                        <td class="value"></td>
+                        <td class="value"></td>
+                      </tr>
+                      <tr>
+                        <td class="label">Miscellaneous</td>
+                        <td class="col-unit"></td>
+                        <td class="value"></td>
+                        <td class="value"></td>
+                        <td class="value"></td>
+                        <td class="value"></td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Total Franchise Setup Costs</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">60,050</td>
+                        <td class="value">72,300</td>
+                        <td class="value">1,134,550</td>
+                        <td class="value">72,300</td>
+                      </tr>
+                      <tr class="section">
+                        <td>Deal Expenses</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="label">(+) Working Capital (3 Months)</td>
+                        <td class="col-unit">$</td>
+                        <td class="value assumption">25,000</td>
+                        <td class="value">32,500</td>
+                        <td class="value assumption">40,000</td>
+                        <td class="value">32,500</td>
+                      </tr>
+                      <tr>
+                        <td class="label">(+) SBA Guaranty Fee &amp; Others</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">3,003</td>
+                        <td class="value">3,615</td>
+                        <td class="value">56,728</td>
+                        <td class="value">3,615</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Total Project Costs</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">88,053</td>
+                        <td class="value">108,415</td>
+                        <td class="value">1,231,278</td>
+                        <td class="value">108,415</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Looping video -->
+            <div class="carousel__slide carousel__slide--video">
+              <a
+                class="carousel__video-link carousel__actionable"
+                href="#video"
+                aria-label="Watch the Decimal franchisor video"
+              >
+                <video
+                  class="carousel__video"
+                  src="assets/video-part-1.mp4"
+                  poster="assets/hero-video-poster.png"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  aria-hidden="true"
+                ></video>
+                <p class="carousel__video-caption">
+                  You can start building your own financial model
+                </p>
+              </a>
+            </div>
+
+            <!-- Year summary -->
+            <div class="carousel__slide carousel__slide--summary card">
+              <div class="summary-tabs" role="tablist" aria-label="Projection years">
+                <span class="summary-tabs__indicator" aria-hidden="true"></span>
+                <button type="button" class="summary-tabs__tab summary-tabs__tab--active" role="tab" aria-selected="true">Year 1</button>
+                <button type="button" class="summary-tabs__tab" role="tab" aria-selected="false">Year 2</button>
+                <button type="button" class="summary-tabs__tab" role="tab" aria-selected="false">Year 3</button>
+                <button type="button" class="summary-tabs__tab" role="tab" aria-selected="false">Year 4</button>
+              </div>
+
+              <dl class="summary-rows">
+                <div class="summary-rows__row">
+                  <dt>Gross Annual Sales</dt>
+                  <dd data-metric="grossAnnualSales">$ 160,421</dd>
+                </div>
+                <div class="summary-rows__row">
+                  <dt>Total Franchise Expenses</dt>
+                  <dd data-metric="totalFranchiseExpenses">$ 22,093</dd>
+                </div>
+                <div class="summary-rows__row">
+                  <dt>Total Cost of Sales</dt>
+                  <dd data-metric="totalCostOfSales">$ 83,355</dd>
+                </div>
+              </dl>
+
+              <div class="summary-total">
+                <p class="summary-total__label">Gross Profit</p>
+                <p class="summary-total__value" data-metric="grossProfit">$ 54,972</p>
+              </div>
+            </div>
+
+            <!-- Purple "82% Faster" -->
+            <div class="carousel__slide carousel__slide--faster">
+              <div class="faster__content">
+                <p class="faster__text">
+                  <strong>Franchisees</strong> with access<br />
+                  to the sell-side franchise models<br />
+                  close deals on average
+                </p>
+                <p class="faster__stat">82% Faster</p>
+              </div>
+            </div>
+
+            <!-- Summary Income Statement -->
+            <div
+              class="carousel__slide carousel__slide--income card"
+              aria-label="Summary income statement and cashflow waterfall with Year 1 through Year 9 projections"
+            >
+              <div class="model-table">
+                <div class="model-table__scale">
+                  <table class="model-table__grid">
+                    <thead>
+                      <tr>
+                        <th class="col-label">
+                          <span class="title">Summary Income Statement</span>
+                          <span class="subtitle">All numbers in US$ unless otherwise stated</span>
+                        </th>
+                        <th class="col-unit"></th>
+                        <th class="col-year year-1">
+                          <span class="year">Year 1</span><span class="cal">2026</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 2</span><span class="cal">2027</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 3</span><span class="cal">2028</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 4</span><span class="cal">2029</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 5</span><span class="cal">2030</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 6</span><span class="cal">2031</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 7</span><span class="cal">2032</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 8</span><span class="cal">2033</span>
+                        </th>
+                        <th class="col-year">
+                          <span class="year">Year 9</span><span class="cal">2034</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="strong">
+                        <td class="label">Gross Annual Sales</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">160,421</td>
+                        <td class="value">412,061</td>
+                        <td class="value">663,701</td>
+                        <td class="value">915,341</td>
+                        <td class="value">1,166,981</td>
+                        <td class="value">1,418,621</td>
+                        <td class="value">1,670,261</td>
+                        <td class="value">1,921,901</td>
+                        <td class="value">2,173,541</td>
+                      </tr>
+                      <tr class="metric">
+                        <td class="label">Growth Rate (%)</td>
+                        <td class="col-unit"></td>
+                        <td class="value"></td>
+                        <td class="value">156.86%</td>
+                        <td class="value">61.07%</td>
+                        <td class="value">37.91%</td>
+                        <td class="value">27.49%</td>
+                        <td class="value">21.56%</td>
+                        <td class="value">17.74%</td>
+                        <td class="value">15.07%</td>
+                        <td class="value">13.09%</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Total Franchise Expenses</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">22,093</td>
+                        <td class="value">52,290</td>
+                        <td class="value">82,487</td>
+                        <td class="value">112,684</td>
+                        <td class="value">142,880</td>
+                        <td class="value">173,077</td>
+                        <td class="value">203,274</td>
+                        <td class="value">233,471</td>
+                        <td class="value">263,668</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Net Annual Sales</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">138,327</td>
+                        <td class="value">359,771</td>
+                        <td class="value">581,214</td>
+                        <td class="value">802,657</td>
+                        <td class="value">1,024,100</td>
+                        <td class="value">1,245,543</td>
+                        <td class="value">1,466,987</td>
+                        <td class="value">1,688,430</td>
+                        <td class="value">1,909,873</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Total Cost of Sales</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">83,355</td>
+                        <td class="value">175,845</td>
+                        <td class="value">281,235</td>
+                        <td class="value">356,175</td>
+                        <td class="value">431,115</td>
+                        <td class="value">656,655</td>
+                        <td class="value">723,145</td>
+                        <td class="value">848,835</td>
+                        <td class="value">903,475</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Gross Profit</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">54,972</td>
+                        <td class="value">183,926</td>
+                        <td class="value">299,979</td>
+                        <td class="value">446,482</td>
+                        <td class="value">592,985</td>
+                        <td class="value">588,888</td>
+                        <td class="value">743,842</td>
+                        <td class="value">839,595</td>
+                        <td class="value">1,006,398</td>
+                      </tr>
+                      <tr class="metric">
+                        <td class="label">Gross Profit Margin (%)</td>
+                        <td class="col-unit"></td>
+                        <td class="value">34.3%</td>
+                        <td class="value">44.6%</td>
+                        <td class="value">45.2%</td>
+                        <td class="value">48.8%</td>
+                        <td class="value">50.8%</td>
+                        <td class="value">41.5%</td>
+                        <td class="value">44.5%</td>
+                        <td class="value">43.7%</td>
+                        <td class="value">46.3%</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Adjusted EBITDA (Inc. Executive Compensation)</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">10,358</td>
+                        <td class="value">126,921</td>
+                        <td class="value">231,785</td>
+                        <td class="value">363,018</td>
+                        <td class="value">500,251</td>
+                        <td class="value">473,425</td>
+                        <td class="value">618,848</td>
+                        <td class="value">702,131</td>
+                        <td class="value">854,944</td>
+                      </tr>
+                      <tr class="metric">
+                        <td class="label">Adjusted EBITDA Margin (%)</td>
+                        <td class="col-unit"></td>
+                        <td class="value">6.5%</td>
+                        <td class="value">30.8%</td>
+                        <td class="value">34.9%</td>
+                        <td class="value">39.7%</td>
+                        <td class="value">42.9%</td>
+                        <td class="value">33.4%</td>
+                        <td class="value">37.1%</td>
+                        <td class="value">36.5%</td>
+                        <td class="value">39.3%</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Net Income</td>
+                        <td class="col-unit">$</td>
+                        <td class="value negative">(4,795)</td>
+                        <td class="value">86,640</td>
+                        <td class="value">165,658</td>
+                        <td class="value">264,494</td>
+                        <td class="value">367,874</td>
+                        <td class="value">348,258</td>
+                        <td class="value">457,884</td>
+                        <td class="value">520,965</td>
+                        <td class="value">636,259</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table class="model-table__grid model-table__grid--secondary">
+                    <thead>
+                      <tr>
+                        <th class="col-label">
+                          <span class="title">Summary Cashflow Waterfall</span>
+                        </th>
+                        <th class="col-unit"></th>
+                        <th class="col-year">Year 1</th>
+                        <th class="col-year">Year 2</th>
+                        <th class="col-year">Year 3</th>
+                        <th class="col-year">Year 4</th>
+                        <th class="col-year">Year 5</th>
+                        <th class="col-year">Year 6</th>
+                        <th class="col-year">Year 7</th>
+                        <th class="col-year">Year 8</th>
+                        <th class="col-year">Year 9</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="strong">
+                        <td class="label">Active Year</td>
+                        <td class="col-unit"></td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                        <td class="value">1</td>
+                      </tr>
+                      <tr class="strong">
+                        <td class="label">All numbers in US$ unless otherwise stated</td>
+                        <td class="col-unit"></td>
+                        <td class="value">2026</td>
+                        <td class="value">2027</td>
+                        <td class="value">2028</td>
+                        <td class="value">2029</td>
+                        <td class="value">2030</td>
+                        <td class="value">2031</td>
+                        <td class="value">2032</td>
+                        <td class="value">2033</td>
+                        <td class="value">2034</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Unlevered FCF Available to Lenders</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">2,054</td>
+                        <td class="value">93,042</td>
+                        <td class="value">171,565</td>
+                        <td class="value">269,853</td>
+                        <td class="value">372,626</td>
+                        <td class="value">352,338</td>
+                        <td class="value">461,220</td>
+                        <td class="value">523,476</td>
+                        <td class="value">637,588</td>
+                      </tr>
+                      <tr>
+                        <td class="label">Less: Annual Debt Financing Expenses</td>
+                        <td class="col-unit negative">$</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                        <td class="value negative">(11,007)</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td class="label">Levered FCF Available to Equity Holders Before Exit</td>
+                        <td class="col-unit">$</td>
+                        <td class="value">(8,953)</td>
+                        <td class="value">82,035</td>
+                        <td class="value">160,559</td>
+                        <td class="value">258,847</td>
+                        <td class="value">361,620</td>
+                        <td class="value">341,332</td>
+                        <td class="value">450,213</td>
+                        <td class="value">512,470</td>
+                        <td class="value">626,581</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== THE PROBLEM ===================== -->
+      <section class="problem" id="problem" aria-labelledby="problem-heading">
+        <div class="container problem__grid">
+          <div class="problem__content">
+            <h3>The Problem</h3>
+            <h2 id="problem-heading">How much will I make?</h2>
+            <div class="problem__body">
+              <p>
+                Franchisors are legally prohibited from providing financial performance representations
+                outside of Item 19 of the FDD.
+              </p>
+              <p>
+                Prospective franchisees need to build a financial model to gain confidence in the model,
+                calculate payback period and help them secure funding.
+              </p>
+            </div>
+          </div>
+
+          <div class="problem__papers" data-problem-papers aria-hidden="true">
+            <div class="problem__papers-inner">
+              <img
+                class="problem__paper problem__paper--left"
+                src="assets/problem-image-2.jpg"
+                alt=""
+                width="813"
+                height="1054"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                class="problem__paper problem__paper--right"
+                src="assets/problem-image-3.jpg"
+                alt=""
+                width="813"
+                height="1054"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                class="problem__paper problem__paper--center"
+                src="assets/problem-image-1.jpg"
+                alt=""
+                width="811"
+                height="1051"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" aria-hidden="true" />
+
+      <!-- ===================== THE SOLUTION ===================== -->
+      <section class="solution" id="solution" aria-labelledby="solution-heading">
+        <div class="container">
+          <div class="solution__intro">
+            <h3>The Solution</h3>
+            <h2 id="solution-heading">Sell-side research for franchisees</h2>
+            <p class="solution__lead">
+              <strong>Wefranch works with franchisors to understand their business model,</strong>
+              and our modeling experts develop a template to allow prospective franchisees to input
+              their assumptions and see how the business could perform based on their inputs.
+            </p>
+          </div>
+
+          <div class="solution__showcase">
+            <figure class="solution__figure">
+              <div class="solution__iframe-shell" data-visual="comprehensive">
+                <div class="solution__iframe-viewport">
+                  <iframe
+                    class="solution__iframe"
+                    src="ui/?embed=1&feature=comprehensive"
+                    title="Decimal financial modeling product demo"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  ></iframe>
+                </div>
+              </div>
+            </figure>
+
+            <div class="solution__features">
+              <div
+                class="solution__features-list"
+                role="tablist"
+                aria-label="Product features"
+              >
+                <button
+                  type="button"
+                  class="solution__feature is-active"
+                  role="tab"
+                  id="solution-feature-comprehensive"
+                  aria-selected="true"
+                  aria-expanded="true"
+                  aria-controls="solution-feature-comprehensive-panel"
+                  data-visual="base"
+                >
+                  <span class="solution__feature-title">Comprehensive</span>
+                  <span
+                    class="solution__feature-body"
+                    id="solution-feature-comprehensive-panel"
+                    role="region"
+                    aria-labelledby="solution-feature-comprehensive"
+                  >
+                    <p>
+                      The model accounts for fees such as royalties, brand fund, technology fees,
+                      etc., so the franchisee can clearly see what the take home is in different
+                      scenarios.
+                    </p>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="solution__feature"
+                  role="tab"
+                  id="solution-feature-secure"
+                  aria-selected="false"
+                  aria-expanded="false"
+                  aria-controls="solution-feature-secure-panel"
+                  data-visual="secure"
+                >
+                  <span class="solution__feature-title">Secure</span>
+                  <span
+                    class="solution__feature-body"
+                    id="solution-feature-secure-panel"
+                    role="region"
+                    aria-labelledby="solution-feature-secure"
+                    hidden
+                  >
+                    <p>
+                      Franchisees request access that is only granted by admins to qualified
+                      prospects.
+                    </p>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="solution__feature"
+                  role="tab"
+                  id="solution-feature-interactive"
+                  aria-selected="false"
+                  aria-expanded="false"
+                  aria-controls="solution-feature-interactive-panel"
+                  data-visual="interactive"
+                >
+                  <span class="solution__feature-title">Interactive</span>
+                  <span
+                    class="solution__feature-body"
+                    id="solution-feature-interactive-panel"
+                    role="region"
+                    aria-labelledby="solution-feature-interactive"
+                    hidden
+                  >
+                    <p>
+                      Franchisees enter business-specific inputs that determine their individual
+                      performance and a unique output.
+                    </p>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="solution__feature"
+                  role="tab"
+                  id="solution-feature-compliant"
+                  aria-selected="false"
+                  aria-expanded="false"
+                  aria-controls="solution-feature-compliant-panel"
+                  data-visual="compliant"
+                >
+                  <span class="solution__feature-title">Compliant</span>
+                  <span
+                    class="solution__feature-body"
+                    id="solution-feature-compliant-panel"
+                    role="region"
+                    aria-labelledby="solution-feature-compliant"
+                    hidden
+                  >
+                    <p>
+                      The model includes complete disclaimers verified by a team of franchise
+                      lawyers to ensure full alignment with the FTC Franchise Rule and Item 19
+                      requirements.
+                    </p>
+                  </span>
+                </button>
+              </div>
+
+              <div class="solution__features-indicator" aria-hidden="true">
+                <span class="solution__features-indicator-track"></span>
+                <span class="solution__features-indicator-thumb"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="solution__detail">
+            <p class="solution__detail-title">Not Financial Performance Representations</p>
+            <p class="solution__detail-intro">
+              Wefranch is not the franchisor or its representative, and is thus able to assist
+              prospective franchisees in their research. We are compliant with franchise laws as we
+              never publish financial performance representations.
+            </p>
+
+            <div class="solution__detail-content">
+              <div class="solution__detail-body">
+                <p>
+                  <strong>
+                    Instead, we provide an interactive tool that requires the prospective
+                    franchisee to input their assumptions and generate a unique scenario.
+                  </strong>
+                </p>
+                <p>
+                  This tool increases time to close by allowing franchisees to see the level of
+                  execution they would need to produce to meet their goals and reach top-quartile
+                  performance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" aria-hidden="true" />
+
+      <!-- ===================== VIDEO ===================== -->
+      <section class="video-section" id="video" aria-labelledby="video-heading">
+        <div class="container">
+          <p class="video-section__intro" id="video-heading">
+            <span class="video-section__brand">Decimal</span> is a franchisor that has adopted this
+            tool. Decimal started franchising in 2022 and already has three franchisees open.
+          </p>
+
+          <div class="video-section__player">
+            <video
+              class="video-section__video"
+              src="assets/video-part-1.mp4"
+              poster="assets/hero-video-poster.png"
+              playsinline
+              preload="metadata"
+              aria-label="Decimal franchisor presentation about the financial modeling tool"
+            ></video>
+            <button
+              type="button"
+              class="video-section__control"
+              data-state="paused"
+              aria-label="Play video"
+            >
+              <span class="video-section__icon video-section__icon--play" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="20"
+                  viewBox="0 0 14 16"
+                  fill="none"
+                >
+                  <path
+                    d="M1.2 0.8C0.5 0.4 0 0.8 0 1.6v12.8c0 0.8 0.5 1.2 1.2 0.8l11.2-6.4c0.7-0.4 0.7-1.2 0-1.6L1.2 0.8z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <span class="video-section__icon video-section__icon--pause" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="20"
+                  viewBox="0 0 14 16"
+                  fill="none"
+                >
+                  <rect x="1" y="0" width="4.5" height="16" rx="1.5" fill="currentColor" />
+                  <rect x="8.5" y="0" width="4.5" height="16" rx="1.5" fill="currentColor" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== ACTIONS ===================== -->
+      <section class="actions" id="actions" aria-label="Actions">
+        <div class="container">
+          <div class="actions__grid">
+            <article class="actions__card">
+              <p class="actions__eyebrow">Are a franchisor?</p>
+              <h2 class="actions__title">Schedule a demo of the financial modeling tool</h2>
+              <a class="btn actions__button actions__button--dark" href="#">Schedule demo</a>
+            </article>
+
+            <div class="actions__divider" aria-hidden="true"></div>
+
+            <article class="actions__card">
+              <p class="actions__eyebrow">Are a prospective franchisee?</p>
+              <h2 class="actions__title">Get access to the library of financial models</h2>
+              <a class="btn btn--primary actions__button" href="#">Get access now</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copyright">© 2026 wefranch</p>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="#">About</a>
+          <a href="#">Concepts</a>
+          <a href="#">Reviews</a>
+          <a href="#">FDDs</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms &amp; Conditions</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script type="module" src="scripts/page-load.js"></script>
+    <script type="module" src="scripts/carousel.js"></script>
+    <script type="module" src="scripts/summary-card.js"></script>
+    <script type="module" src="scripts/problem-papers.js"></script>
+    <script type="module" src="scripts/solution-features.js"></script>
+    <script type="module" src="scripts/video-section.js"></script>
+  </body>
+</html>

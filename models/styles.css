@@ -1,0 +1,205 @@
+:root {
+  --ink: #000000;
+  --muted: #aaaaaa;
+  --line: #e7e7e7;
+  --highlight: #f4f4f4;
+  --header-bg: #f4f4f4;
+  --year1-bg: #ece9f8;
+  --low-bg: #ece9f8;
+  --high-bg: #ece9f8;
+  --col-w: 116px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 32px 48px 48px 48px;
+  background: #ffffff;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.table-shell {
+  width: 100%;
+}
+
+.table-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 48px;
+}
+
+.table-select {
+  min-width: 240px;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.table-panel[hidden] {
+  display: none;
+}
+
+.scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.summary {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+  min-width: max-content;
+}
+
+.summary th,
+.summary td {
+  padding: 12px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Column sizing */
+.summary .col-label {
+  width: 240px;
+}
+.summary .col-unit {
+  width: 40px;
+  color: var(--muted);
+}
+.summary .col-year {
+  width: var(--col-w);
+}
+.summary .col-scenario {
+  width: 132px;
+}
+
+/* Header row */
+.summary thead th {
+  background: var(--header-bg);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.summary thead th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.summary thead th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.summary thead th.year-1 {
+  background: var(--year1-bg);
+}
+
+.table-panel[data-table-panel="investments"] td.assumption:nth-child(3) {
+  background: var(--low-bg);
+}
+
+.table-panel[data-table-panel="investments"] td.assumption:nth-child(5) {
+  background: var(--high-bg);
+}
+.title {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+}
+.subtitle {
+  display: block;
+  margin-top: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--muted);
+}
+.year {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.year svg {
+  color: var(--muted);
+  flex: none;
+}
+.cal {
+  display: block;
+  margin-top: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Standard data rows */
+.summary td.label {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.table-panel[data-table-panel="investments"] td.label {
+  color: var(--ink);
+}
+.summary td.value {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
+.summary-secondary {
+  margin-top: 32px;
+}
+
+.summary td.value.negative,
+.summary td.col-unit.negative {
+  color: #b42318;
+}
+
+/* Bold subtotal rows without background (e.g. Gross Annual Sales) */
+tr.strong td,
+tr.strong td.label {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Percent / margin rows - italic, muted */
+tr.metric td,
+tr.metric td.label,
+tr.metric td.value {
+  font-style: italic;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* Highlight / total rows (grey background, bold, rounded ends) */
+tr.highlight td {
+  background: var(--highlight);
+  font-weight: 700;
+  color: var(--ink);
+}
+tr.highlight td.label {
+  color: var(--ink);
+}
+tr.highlight td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+tr.highlight td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+tr.section td {
+  color: var(--ink);
+  font-weight: 700;
+  padding-top: 28px;
+}
