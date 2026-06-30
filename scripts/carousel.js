@@ -59,17 +59,23 @@ if (wrap && track) {
   let animating = false;
   let hovered = false;
   let rafId = null;
+  let offset = 0;
+
+  function applyTransform() {
+    track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+  }
 
   function step() {
     if (!animating) return;
 
-    wrap.scrollLeft += hovered ? SPEED.hover : SPEED.normal;
+    offset += hovered ? SPEED.hover : SPEED.normal;
 
     const { setWidth } = measure();
-    if (wrap.scrollLeft >= setWidth) {
-      wrap.scrollLeft -= setWidth;
+    if (offset >= setWidth) {
+      offset -= setWidth;
     }
 
+    applyTransform();
     rafId = requestAnimationFrame(step);
   }
 
@@ -87,6 +93,10 @@ if (wrap && track) {
 
     if (enable) {
       appendClones();
+      const { setWidth } = measure();
+      if (offset >= setWidth) {
+        offset %= setWidth;
+      }
       wrap.classList.add("hero__carousel-wrap--auto");
       track.classList.add("carousel--auto");
       window.dispatchEvent(new CustomEvent("carousel:updated"));
@@ -98,7 +108,8 @@ if (wrap && track) {
     } else {
       stopAnimation();
       removeClones();
-      wrap.scrollLeft = 0;
+      offset = 0;
+      track.style.transform = "";
       wrap.classList.remove("hero__carousel-wrap--auto");
       track.classList.remove("carousel--auto");
     }

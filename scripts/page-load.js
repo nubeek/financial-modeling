@@ -27,6 +27,8 @@ const CARD_REVEAL_FROM = {
   filter: "blur(2px)",
 };
 
+const CAROUSEL_REVEAL_OFFSET = 73;
+
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -103,11 +105,17 @@ function revealWords(words, { stagger = WORD_STAGGER } = {}) {
 }
 
 function wrapLeadLines(leadText) {
+  const isMobileLayout = window.matchMedia("(max-width: 980px)").matches;
   const segments = [];
   let current = [];
 
   [...leadText.childNodes].forEach((node) => {
     if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "BR") {
+      if (isMobileLayout && node.classList.contains("hero__lead-br--desktop")) {
+        current.push(document.createTextNode(" "));
+        return;
+      }
+
       if (current.length) segments.push(current);
       current = [];
       return;
@@ -166,6 +174,37 @@ function commitHeaderAfterIntro(header) {
   header.style.transform = "";
 }
 
+function getCarouselWrapFinalPadding(wrap) {
+  const ring = getComputedStyle(wrap).getPropertyValue("--carousel-actionable-ring").trim();
+  return ring || "8px";
+}
+
+function revealCarouselWrapPadding(wrap, slideCount) {
+  const finalPadding = getCarouselWrapFinalPadding(wrap);
+  const totalDuration =
+    REVEAL_DURATION + Math.max(0, slideCount - 1) * REVEAL_STAGGER;
+
+  return wrap
+    .animate(
+      [
+        { paddingBottom: `${CAROUSEL_REVEAL_OFFSET}px` },
+        { paddingBottom: finalPadding },
+      ],
+      {
+        duration: totalDuration,
+        easing: INTRO_EASING,
+        fill: "forwards",
+      }
+    )
+    .finished;
+}
+
+function commitCarouselWrapAfterIntro(wrap) {
+  if (!wrap) return;
+  wrap.getAnimations().forEach((animation) => animation.cancel());
+  wrap.style.paddingBottom = "";
+}
+
 function revealCarouselSlides(slides) {
   const animations = slides.map((slide, index) =>
     slide.animate([CARD_REVEAL_FROM, REVEAL_TO], {
@@ -188,6 +227,8 @@ function revealAllImmediately() {
     slide.style.filter = "";
   });
 
+  commitCarouselWrapAfterIntro(document.querySelector(".hero__carousel-wrap"));
+
   window.dispatchEvent(new CustomEvent("hero:carousel-reveal-start"));
 }
 
@@ -199,6 +240,7 @@ async function runIntroSequence() {
   const slides = [
     ...document.querySelectorAll(".carousel__slide:not([data-carousel-clone])"),
   ];
+  const carouselWrap = document.querySelector(".hero__carousel-wrap");
 
   if (!title || !leadText || !header) {
     revealAllImmediately();
@@ -231,11 +273,13 @@ async function runIntroSequence() {
   await Promise.all([
     revealHeader(header),
     revealCarouselSlides(slides),
+    carouselWrap ? revealCarouselWrapPadding(carouselWrap, slides.length) : Promise.resolve(),
     leadButton ? revealElement(leadButton) : Promise.resolve(),
   ]);
 
   document.documentElement.removeAttribute("data-page-load");
   commitHeaderAfterIntro(header);
+  commitCarouselWrapAfterIntro(carouselWrap);
 
   window.dispatchEvent(new CustomEvent("hero:intro-complete"));
 }
