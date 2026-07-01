@@ -1,3 +1,5 @@
+import { debounce, isStackedLayout, onReady, prefersReducedMotion } from "./utils.js";
+
 const SPREAD_EASING = "cubic-bezier(0.33, 1, 0.68, 1)";
 const SPREAD_DURATION = 900;
 const SPREAD_STAGGER = 60;
@@ -22,16 +24,8 @@ const PAPERS = [
   },
 ];
 
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function isMobileSpread() {
-  return window.matchMedia("(max-width: 980px)").matches;
-}
-
 function getSpreadTarget(paper) {
-  return isMobileSpread() ? paper.spreadMobile : paper.spread;
+  return isStackedLayout() ? paper.spreadMobile : paper.spread;
 }
 
 function spreadImmediately(container) {
@@ -94,8 +88,4 @@ function initProblemPapers() {
   observer.observe(container);
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initProblemPapers, { once: true });
-} else {
-  initProblemPapers();
-}
+onReady(initProblemPapers);

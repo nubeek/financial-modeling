@@ -1,4 +1,6 @@
 /** Split-text animations inspired by React Bits Split Text. */
+import { whenAllFinished } from "./utils.js";
+
 const DEFAULTS = {
   duration: 400,
   stagger: 50,
@@ -30,11 +32,6 @@ function buildKeyframes(config) {
       filter: "blur(0px)",
     },
   ];
-}
-
-function whenAllFinished(animations) {
-  if (!animations.length) return Promise.resolve();
-  return Promise.all(animations.map((animation) => animation.finished));
 }
 
 function animateItem(element, index, config, bucket) {
@@ -209,16 +206,6 @@ function animateOutItem(element, index, config, bucket) {
   return animation;
 }
 
-export function animateSplitText(element, text, options = {}) {
-  const config = { ...DEFAULTS, ...options };
-
-  element._splitAnimations?.forEach((animation) => animation.cancel());
-  element._splitAnimations = [];
-
-  finalizeTransitionLayers(element);
-  mountSplitChars(element, text, config, { animate: true, bucket: element._splitAnimations });
-}
-
 function measureSplitText(element, text, config) {
   const probe = document.createElement("span");
   probe.style.visibility = "hidden";
@@ -326,10 +313,21 @@ export function transitionSplitText(element, text, options = {}) {
 }
 
 function createWordWrapper(text, index, config, bucket) {
+  const wordClass = config.wordClass ?? "split-word";
+  const wordInnerClass = config.wordInnerClass ?? "split-word-inner";
+
+  if (config.flatWords) {
+    const span = document.createElement("span");
+    span.className = wordClass;
+    span.textContent = text;
+    animateItem(span, index, config, bucket);
+    return span;
+  }
+
   const outer = document.createElement("span");
-  outer.className = "split-word";
+  outer.className = wordClass;
   const inner = document.createElement("span");
-  inner.className = "split-word-inner";
+  inner.className = wordInnerClass;
   inner.textContent = text;
   outer.appendChild(inner);
   animateItem(inner, index, config, bucket);
@@ -373,11 +371,17 @@ export function animateSplitWords(element, options = {}) {
     wrapWordsInNode(node, config, element._splitAnimations, state)
   );
 
-  return whenAllFinished(element._splitAnimations);
+  return {
+    wordCount: state.index,
+    finished: whenAllFinished(element._splitAnimations),
+  };
 }
 
 export function animateSplitLines(element, options = {}) {
   const config = { ...REACT_BITS_DEFAULTS, ...options };
+  const lineClass = config.lineClass ?? "split-line";
+  const lineInnerClass = config.lineInnerClass ?? "split-line-inner";
+  const mergeBreak = config.mergeBreak ?? (() => false);
 
   element._splitAnimations?.forEach((animation) => animation.cancel());
   element._splitAnimations = [];
@@ -387,12 +391,17 @@ export function animateSplitLines(element, options = {}) {
 
   element.childNodes.forEach((node) => {
     if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "BR") {
-      segments.push(current);
+      if (mergeBreak(node)) {
+        current.push(document.createTextNode(" "));
+        return;
+      }
+
+      if (current.length) segments.push(current);
       current = [];
       return;
     }
 
-    current.push(node.cloneNode(true));
+    current.push(node);
   });
 
   if (current.length) segments.push(current);
@@ -401,9 +410,9 @@ export function animateSplitLines(element, options = {}) {
 
   segments.forEach((nodes, lineIndex) => {
     const line = document.createElement("span");
-    line.className = "split-line";
+    line.className = lineClass;
     const inner = document.createElement("span");
-    inner.className = "split-line-inner";
+    inner.className = lineInnerClass;
     nodes.forEach((node) => inner.appendChild(node));
     line.appendChild(inner);
     element.appendChild(line);
@@ -411,5 +420,8 @@ export function animateSplitLines(element, options = {}) {
     animateItem(inner, lineIndex, config, element._splitAnimations);
   });
 
-  return whenAllFinished(element._splitAnimations);
+  return {
+    lineCount: segments.length,
+    finished: whenAllFinished(element._splitAnimations),
+  };
 }

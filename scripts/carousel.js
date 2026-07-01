@@ -1,3 +1,5 @@
+import { debounce, isStackedLayout, onReady, prefersReducedMotion } from "./utils.js";
+
 const wrap = document.querySelector(".hero__carousel-wrap");
 const track = document.querySelector(".carousel");
 
@@ -60,6 +62,7 @@ if (wrap && track) {
   let hovered = false;
   let rafId = null;
   let offset = 0;
+  let cachedSetWidth = 0;
 
   function applyTransform() {
     track.style.transform = `translate3d(-${offset}px, 0, 0)`;
@@ -70,9 +73,8 @@ if (wrap && track) {
 
     offset += hovered ? SPEED.hover : SPEED.normal;
 
-    const { setWidth } = measure();
-    if (offset >= setWidth) {
-      offset -= setWidth;
+    if (cachedSetWidth > 0 && offset >= cachedSetWidth) {
+      offset -= cachedSetWidth;
     }
 
     applyTransform();
@@ -93,9 +95,9 @@ if (wrap && track) {
 
     if (enable) {
       appendClones();
-      const { setWidth } = measure();
-      if (offset >= setWidth) {
-        offset %= setWidth;
+      cachedSetWidth = measure().setWidth;
+      if (offset >= cachedSetWidth) {
+        offset %= cachedSetWidth;
       }
       wrap.classList.add("hero__carousel-wrap--auto");
       track.classList.add("carousel--auto");
@@ -109,6 +111,7 @@ if (wrap && track) {
       stopAnimation();
       removeClones();
       offset = 0;
+      cachedSetWidth = 0;
       track.style.transform = "";
       wrap.classList.remove("hero__carousel-wrap--auto");
       track.classList.remove("carousel--auto");
@@ -123,14 +126,10 @@ if (wrap && track) {
     hovered = false;
   });
 
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(applyMode, 100);
-  });
+  window.addEventListener("resize", debounce(applyMode));
 
   function tryStart() {
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!prefersReducedMotion()) {
       applyMode();
     }
   }

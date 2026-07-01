@@ -1,3 +1,5 @@
+import { onReady } from "./utils.js";
+
 function setControlState(control, playing) {
   control.dataset.state = playing ? "playing" : "paused";
   control.setAttribute("aria-label", playing ? "Pause video" : "Play video");
@@ -24,8 +26,4 @@ function initVideoSection() {
   video.addEventListener("ended", () => setControlState(control, false));
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initVideoSection, { once: true });
-} else {
-  initVideoSection();
-}
+onReady(initVideoSection);

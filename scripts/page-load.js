@@ -1,17 +1,15 @@
+import { animateSplitLines, animateSplitWords } from "./split-text.js";
+import { isStackedLayout, onReady, prefersReducedMotion, whenAllFinished } from "./utils.js";
+
 const INTRO_EASING = "cubic-bezier(0.33, 1, 0.68, 1)";
 const REVEAL_DURATION = 800;
 const REVEAL_STAGGER = 100;
 const WORD_STAGGER = 80;
+const REVEAL_PHASE_OVERLAP_MS = 400;
 
 const REVEAL_FROM = {
   opacity: 0,
   transform: "translateY(48px)",
-  filter: "blur(2px)",
-};
-
-const TITLE_REVEAL_FROM = {
-  opacity: 0,
-  transform: "translateY(20px)",
   filter: "blur(2px)",
 };
 
@@ -29,13 +27,41 @@ const CARD_REVEAL_FROM = {
 
 const CAROUSEL_REVEAL_OFFSET = 73;
 
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const HERO_WORD_OPTIONS = {
+  duration: REVEAL_DURATION,
+  stagger: WORD_STAGGER,
+  fromY: 20,
+  fromBlur: 2,
+  easing: INTRO_EASING,
+  flatWords: true,
+  wordClass: "hero__title-word",
+};
+
+const HERO_LINE_OPTIONS = {
+  duration: REVEAL_DURATION,
+  stagger: REVEAL_STAGGER,
+  fromY: 48,
+  fromBlur: 2,
+  easing: INTRO_EASING,
+  lineClass: "hero__lead-line",
+  lineInnerClass: "hero__lead-line-inner",
+  mergeBreak: (node) =>
+    isStackedLayout() && node.classList.contains("hero__lead-br--desktop"),
+};
+
+function getIntroEndTime(wordCount, lineCount, leadStartDelay) {
+  const titleEnd = (wordCount - 1) * WORD_STAGGER + REVEAL_DURATION;
+  const leadEnd = leadStartDelay + (lineCount - 1) * REVEAL_STAGGER + REVEAL_DURATION;
+  return Math.max(titleEnd, leadEnd);
 }
 
-function whenAllFinished(animations) {
-  if (!animations.length) return Promise.resolve();
-  return Promise.all(animations.map((animation) => animation.finished));
+function waitForRevealPhaseTrigger({ wordCount, lineCount, leadStartDelay }) {
+  const waitMs = Math.max(
+    0,
+    getIntroEndTime(wordCount, lineCount, leadStartDelay) - REVEAL_PHASE_OVERLAP_MS
+  );
+
+  return new Promise((resolve) => setTimeout(resolve, waitMs));
 }
 
 function revealElement(element, { delay = 0 } = {}) {
@@ -49,111 +75,6 @@ function revealElement(element, { delay = 0 } = {}) {
       fill: "forwards",
     })
     .finished;
-}
-
-function wrapTitleWords(title) {
-  const words = [];
-
-  function processTextNode(node) {
-    const parts = node.textContent.split(/(\s+)/);
-    const fragment = document.createDocumentFragment();
-
-    parts.forEach((part) => {
-      if (!part) return;
-
-      if (/^\s+$/.test(part)) {
-        fragment.appendChild(document.createTextNode(part));
-        return;
-      }
-
-      const span = document.createElement("span");
-      span.className = "hero__title-word";
-      span.textContent = part;
-      words.push(span);
-      fragment.appendChild(span);
-    });
-
-    node.replaceWith(fragment);
-  }
-
-  function walk(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      processTextNode(node);
-      return;
-    }
-
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      [...node.childNodes].forEach(walk);
-    }
-  }
-
-  [...title.childNodes].forEach(walk);
-  return words;
-}
-
-function revealWords(words, { stagger = WORD_STAGGER } = {}) {
-  const animations = words.map((word, index) =>
-    word.animate([TITLE_REVEAL_FROM, REVEAL_TO], {
-      duration: REVEAL_DURATION,
-      delay: index * stagger,
-      easing: INTRO_EASING,
-      fill: "forwards",
-    })
-  );
-
-  return whenAllFinished(animations);
-}
-
-function wrapLeadLines(leadText) {
-  const isMobileLayout = window.matchMedia("(max-width: 980px)").matches;
-  const segments = [];
-  let current = [];
-
-  [...leadText.childNodes].forEach((node) => {
-    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "BR") {
-      if (isMobileLayout && node.classList.contains("hero__lead-br--desktop")) {
-        current.push(document.createTextNode(" "));
-        return;
-      }
-
-      if (current.length) segments.push(current);
-      current = [];
-      return;
-    }
-
-    current.push(node);
-  });
-
-  if (current.length) segments.push(current);
-
-  const lines = [];
-  leadText.replaceChildren();
-
-  segments.forEach((nodes) => {
-    const line = document.createElement("span");
-    line.className = "hero__lead-line";
-    const inner = document.createElement("span");
-    inner.className = "hero__lead-line-inner";
-    nodes.forEach((node) => inner.appendChild(node));
-    line.appendChild(inner);
-    leadText.appendChild(line);
-    lines.push(inner);
-  });
-
-  return lines;
-}
-
-function revealLines(lines, { stagger = REVEAL_STAGGER, baseDelay = 0 } = {}) {
-  const animations = lines.map((line, index) =>
-    line.animate([REVEAL_FROM, REVEAL_TO], {
-      duration: REVEAL_DURATION,
-      delay: baseDelay + index * stagger,
-      easing: INTRO_EASING,
-      fill: "forwards",
-    })
-  );
-
-  return whenAllFinished(animations);
 }
 
 function revealHeader(header) {
@@ -256,17 +177,17 @@ async function runIntroSequence() {
 
   document.documentElement.dataset.pageLoad = "pending";
 
-  const titleWords = wrapTitleWords(title);
   title.classList.add("is-split");
-  const leadLines = wrapLeadLines(leadText);
   leadText.classList.add("is-split");
 
-  const leadStartDelay = Math.max(0, (titleWords.length - 2) * WORD_STAGGER);
+  const { wordCount, finished: titleFinished } = animateSplitWords(title, HERO_WORD_OPTIONS);
+  const leadStartDelay = Math.max(0, (wordCount - 2) * WORD_STAGGER);
+  const { lineCount, finished: leadFinished } = animateSplitLines(leadText, {
+    ...HERO_LINE_OPTIONS,
+    delay: leadStartDelay,
+  });
 
-  await Promise.all([
-    revealWords(titleWords),
-    revealLines(leadLines, { baseDelay: leadStartDelay }),
-  ]);
+  await waitForRevealPhaseTrigger({ wordCount, lineCount, leadStartDelay });
 
   window.dispatchEvent(new CustomEvent("hero:carousel-reveal-start"));
 
@@ -275,6 +196,8 @@ async function runIntroSequence() {
     revealCarouselSlides(slides),
     carouselWrap ? revealCarouselWrapPadding(carouselWrap, slides.length) : Promise.resolve(),
     leadButton ? revealElement(leadButton) : Promise.resolve(),
+    titleFinished,
+    leadFinished,
   ]);
 
   document.documentElement.removeAttribute("data-page-load");
@@ -284,11 +207,7 @@ async function runIntroSequence() {
   window.dispatchEvent(new CustomEvent("hero:intro-complete"));
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", runIntroSequence, { once: true });
-} else {
-  runIntroSequence();
-}
+onReady(runIntroSequence);
 
 function initHeaderScrollState() {
   const header = document.querySelector(".site-header");

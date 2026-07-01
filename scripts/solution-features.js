@@ -1,3 +1,5 @@
+import { debounce, isStackedLayout, onReady, prefersReducedMotion } from "./utils.js";
+
 function initSolutionFeatures() {
   const showcase = document.querySelector(".solution__showcase");
   if (!showcase) return;
@@ -9,7 +11,6 @@ function initSolutionFeatures() {
   const track = showcase.querySelector(".solution__features-indicator-track");
   const indicator = showcase.querySelector(".solution__features-indicator");
   const list = showcase.querySelector(".solution__features-list");
-  const FEATURE_GAP = 28;
   const FRAME_WIDTH = 1440;
   const FRAME_HEIGHT = 960;
   const SECURE_ZOOM = 1.54;
@@ -27,48 +28,6 @@ function initSolutionFeatures() {
   let stepAnimationsComplete = false;
   let isSectionVisible = false;
   let appliedFrameTransform = null;
-
-  function measureFeatureHeights() {
-    return features.map((feature) => {
-      const title = feature.querySelector(".solution__feature-title");
-      const body = feature.querySelector(".solution__feature-body");
-      const wasActive = feature.classList.contains("is-active");
-
-      feature.classList.remove("is-active");
-      if (body) {
-        body.removeAttribute("hidden");
-        body.setAttribute("aria-hidden", "true");
-      }
-      const collapsed = title.offsetHeight;
-
-      feature.classList.add("is-active");
-      if (body) {
-        body.removeAttribute("hidden");
-        body.setAttribute("aria-hidden", "false");
-      }
-      feature.style.height = "auto";
-      const expanded = feature.offsetHeight;
-
-      feature.classList.toggle("is-active", wasActive);
-      feature.style.height = "";
-      if (body) {
-        body.removeAttribute("hidden");
-        body.setAttribute("aria-hidden", String(!wasActive));
-      }
-
-      return { collapsed, expanded };
-    });
-  }
-
-  function getIndicatorTarget(activeIndex, heights) {
-    let top = 0;
-    for (let i = 0; i < activeIndex; i++) {
-      top += heights[i].collapsed + FEATURE_GAP;
-    }
-    return { top, height: heights[activeIndex].expanded };
-  }
-
-  let featureHeights = measureFeatureHeights();
 
   function setVisual(type) {
     const previousVisual = currentVisual;
@@ -147,32 +106,10 @@ function initSolutionFeatures() {
     syncFrameScale();
   }
 
-  function applyFeatureHeights(activeIndex, { animate = true } = {}) {
-    if (!animate) list?.classList.add("is-instant");
-
-    features.forEach((feature, i) => {
-      const body = feature.querySelector(".solution__feature-body");
-      const active = i === activeIndex;
-      const height = active ? featureHeights[i].expanded : featureHeights[i].collapsed;
-
-      feature.style.height = `${height}px`;
-      if (body) {
-        body.removeAttribute("hidden");
-        body.setAttribute("aria-hidden", String(!active));
-      }
-    });
-
-    if (!animate) {
-      requestAnimationFrame(() => list?.classList.remove("is-instant"));
-    }
-  }
-
   function syncIndicatorTrack() {
     if (!frameShell || !track || !indicator) return;
 
-    const isStacked = window.matchMedia("(max-width: 980px)").matches;
-
-    if (isStacked) {
+    if (isStackedLayout()) {
       track.style.height = "";
       track.style.top = "";
       return;
@@ -185,12 +122,17 @@ function initSolutionFeatures() {
     track.style.top = `${stackRect.top - indicatorRect.top}px`;
   }
 
-  function applyIndicator(activeIndex) {
-    if (!thumb || activeIndex < 0) return;
+  function applyIndicator(index) {
+    if (!thumb || !list || index < 0) return;
 
-    const target = getIndicatorTarget(activeIndex, featureHeights);
-    thumb.style.top = `${target.top}px`;
-    thumb.style.height = `${target.height}px`;
+    const activeFeature = features[index];
+    if (!activeFeature) return;
+
+    const listRect = list.getBoundingClientRect();
+    const featureRect = activeFeature.getBoundingClientRect();
+
+    thumb.style.top = `${featureRect.top - listRect.top}px`;
+    thumb.style.height = `${featureRect.height}px`;
     syncIndicatorTrack();
   }
 
@@ -204,17 +146,30 @@ function initSolutionFeatures() {
 
     activeIndex = index;
 
+    if (!animate) {
+      list?.classList.add("is-instant");
+    }
+
     features.forEach((feature, i) => {
       const active = i === index;
+      const body = feature.querySelector(".solution__feature-body");
 
       feature.classList.toggle("is-active", active);
       feature.setAttribute("aria-selected", String(active));
       feature.setAttribute("aria-expanded", String(active));
+      if (body) {
+        body.setAttribute("aria-hidden", String(!active));
+      }
     });
 
-    applyFeatureHeights(index, { animate });
     setVisual(features[index].dataset.visual);
-    applyIndicator(index);
+
+    requestAnimationFrame(() => {
+      applyIndicator(index);
+      if (!animate) {
+        requestAnimationFrame(() => list?.classList.remove("is-instant"));
+      }
+    });
   }
 
   function cancelAutoAdvance() {
@@ -263,7 +218,7 @@ function initSolutionFeatures() {
   }
 
   async function waitForParentAnimations() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
 
     await new Promise((resolve) => requestAnimationFrame(resolve));
     await new Promise((resolve) => requestAnimationFrame(resolve));
@@ -356,22 +311,18 @@ function initSolutionFeatures() {
     });
   });
 
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      featureHeights = measureFeatureHeights();
-      const activeIndex = features.findIndex((feature) => feature.classList.contains("is-active"));
-      applyFeatureHeights(activeIndex, { animate: false });
-      applyIndicator(activeIndex);
-    }, 100);
+  const handleResize = debounce(() => {
+    applyIndicator(activeIndex);
   });
+
+  window.addEventListener("resize", handleResize);
 
   if (typeof ResizeObserver !== "undefined") {
     const shellObserver = new ResizeObserver(() => {
       syncFrameScale();
     });
     const listObserver = new ResizeObserver(() => {
+      applyIndicator(activeIndex);
       syncIndicatorTrack();
     });
     if (frameShell) shellObserver.observe(frameShell);
@@ -401,8 +352,4 @@ function initSolutionFeatures() {
   initSectionVisibility();
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initSolutionFeatures, { once: true });
-} else {
-  initSolutionFeatures();
-}
+onReady(initSolutionFeatures);

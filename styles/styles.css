@@ -18,6 +18,7 @@
   --shadow-btn: 0px 6px 8px 0px rgba(0, 0, 0, 0.08);
 
   --container: 1250px;
+  --breakpoint-stacked: 980px;
 }
 
 * {
@@ -1083,7 +1084,8 @@ html[data-page-load="pending"] .hero__carousel-wrap {
 }
 
 .solution__feature {
-  display: block;
+  display: grid;
+  grid-template-rows: auto 0fr;
   width: 100%;
   padding: 0;
   border: 0;
@@ -1092,9 +1094,12 @@ html[data-page-load="pending"] .hero__carousel-wrap {
   font: inherit;
   text-align: left;
   cursor: pointer;
-  overflow: hidden;
   box-sizing: border-box;
-  transition: height 0.35s ease;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.solution__feature.is-active {
+  grid-template-rows: auto 1fr;
 }
 
 .solution__features-list.is-instant .solution__feature {
@@ -1115,9 +1120,17 @@ html[data-page-load="pending"] .hero__carousel-wrap {
 
 .solution__feature-body {
   display: block;
+  overflow: hidden;
+  min-height: 0;
 }
 
-.solution__feature-body > p {
+.solution__feature-body-inner {
+  display: block;
+  min-height: 0;
+}
+
+.solution__feature-body > p,
+.solution__feature-body-inner > p {
   margin: 0;
   padding-top: 12px;
   font-size: 16px;
