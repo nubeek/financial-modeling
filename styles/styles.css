@@ -1693,6 +1693,15 @@ html[data-page-load="pending"] .hero__carousel-wrap {
     padding: calc(40px * var(--carousel-scale)) calc(32px * var(--carousel-scale));
   }
 
+  .carousel__slide--faster .faster__text {
+    font-size: calc(18px * var(--carousel-scale));
+  }
+
+  .carousel__slide--faster .faster__stat {
+    margin-top: calc(18px * var(--carousel-scale));
+    font-size: calc(36px * var(--carousel-scale));
+  }
+
   .btn {
     width: 100%;
     height: 47px;
