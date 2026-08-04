@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decimal — Financial Modeling</title>
+  <link rel="icon" href="../../assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="../../assets/x96.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="../../assets/x192.png" />
+  <link rel="manifest" href="../../assets/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-layout">
+    <header class="site-header" aria-label="Application header">
+      <div class="site-header-start">
+        <button class="ui-control ui-icon-button ui-button-ghost" type="button" aria-label="Open menu">
+          <img src="assets/menu.svg" alt="" width="14" height="12" />
+        </button>
+        <a class="brand-lockup" href="../" aria-label="Wefranch home">
+          <img class="brand-mark" src="assets/logo-wefranch.svg" alt="" width="11" height="16" />
+        </a>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <span>Financial Modeling</span>
+          <span class="breadcrumb-separator">/</span>
+          <span>Franchise</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Decimal</span>
+        </nav>
+      </div>
+      <div class="site-header-end">
+        <button class="ui-control user-menu" type="button" aria-label="User menu">
+          <span class="user-avatar" aria-hidden="true"></span>
+          <img src="assets/chevron.svg" alt="" width="11" height="6" />
+        </button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Brand">
+      <div class="hero-logo">
+        <img src="assets/decimal-logo.jpg" alt="Decimal" width="48" height="48" />
+      </div>
+      <h1 class="hero-title">Decimal</h1>
+    </section>
+
+    <div class="embed-security-overlay" aria-hidden="true">
+      <div class="embed-security-overlay__backdrop"></div>
+      <section class="embed-security-modal" aria-label="Access approvals">
+        <button class="ui-control embed-security-modal__close" type="button" aria-label="Close access modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="embed-security-modal__title-row">
+          <img
+            class="embed-security-modal__icon"
+            src="assets/padlock.svg"
+            alt=""
+            width="21"
+            height="24"
+            aria-hidden="true"
+          />
+          <h2 class="embed-security-modal__title">Manage access</h2>
+        </div>
+        <p class="embed-security-modal__copy">
+          Review and respond to requests for access to your financial model.
+        </p>
+        <div class="embed-security-modal__table" role="table" aria-label="Access requests">
+          <div class="embed-security-modal__row embed-security-modal__row--head" role="row">
+            <span role="columnheader">User</span>
+            <span role="columnheader">Access</span>
+          </div>
+          <div class="embed-security-modal__row" role="row">
+            <span role="cell">Adam Boltnier</span>
+            <strong class="embed-security-modal__status embed-security-modal__status--approved" role="cell">
+              <img src="assets/check.svg" alt="" width="14" height="11" aria-hidden="true" />
+              Approved
+            </strong>
+          </div>
+          <div class="embed-security-modal__row" role="row">
+            <span role="cell">Marc Bowen</span>
+            <strong class="embed-security-modal__status embed-security-modal__status--approved" role="cell">
+              <img src="assets/check.svg" alt="" width="14" height="11" aria-hidden="true" />
+              Approved
+            </strong>
+          </div>
+          <div class="embed-security-modal__row" role="row">
+            <span class="embed-security-modal__user embed-security-modal__user--rejected" role="cell">Maria Smith</span>
+            <strong role="cell">Rejected</strong>
+          </div>
+          <div class="embed-security-modal__row" role="row">
+            <span role="cell">David Chen</span>
+            <strong class="embed-security-modal__status embed-security-modal__status--approved" role="cell">
+              <img src="assets/check.svg" alt="" width="14" height="11" aria-hidden="true" />
+              Approved
+            </strong>
+          </div>
+        </div>
+        <div class="embed-security-modal__footer">
+          <button class="ui-control ui-button ui-button-primary embed-security-modal__done" type="button">
+            Done
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <main class="page-shell">
+      <div class="workspace">
+        <aside class="input-panel" id="inputPanel" aria-label="Model inputs">
+          <div class="input-scroll">
+            <div class="filter-header">
+              <h2>Inputs</h2>
+              <p>Change the values below to customize the financial model.</p>
+            </div>
+
+            <button class="ui-control ui-button ui-button-muted load-sample-btn" id="loadSampleValues" type="button">
+              <img src="assets/reload.svg" alt="" width="18" height="18" />
+              <span>Load sample values</span>
+            </button>
+
+            <section class="input-section">
+              <label class="input-label" for="essentialsNewPerMonth">Essentials clients Acquisition</label>
+              <span class="input-sublabel">New Per Month</span>
+              <div class="input-field">
+                <input class="input-value" id="essentialsNewPerMonth" type="number" step="0.1" min="0" inputmode="decimal" />
+              </div>
+            </section>
+
+            <section class="input-section">
+              <label class="input-label" for="essentialsMRR">Essentials clients Acquisition</label>
+              <span class="input-sublabel">MRR</span>
+              <div class="input-field">
+                <span class="input-field-prefix">$</span>
+                <input class="input-value has-prefix" id="essentialsMRR" type="number" step="1" min="0" inputmode="numeric" />
+              </div>
+            </section>
+
+            <section class="input-section">
+              <label class="input-label" for="premiumNewPerMonth">Premium clients Acquisition</label>
+              <span class="input-sublabel">New Per Month</span>
+              <div class="input-field">
+                <input class="input-value" id="premiumNewPerMonth" type="number" step="0.1" min="0" inputmode="decimal" />
+              </div>
+            </section>
+
+            <section class="input-section">
+              <label class="input-label" for="premiumMRR">Premium clients Acquisition</label>
+              <span class="input-sublabel">MRR</span>
+              <div class="input-field">
+                <span class="input-field-prefix">$</span>
+                <input class="input-value has-prefix" id="premiumMRR" type="number" step="1" min="0" inputmode="numeric" />
+              </div>
+            </section>
+          </div>
+
+          <div class="input-actions">
+            <button class="ui-control ui-button ui-button-muted input-action-btn" id="clearAllInputs" type="button">Clear all</button>
+            <button class="ui-control ui-button ui-button-primary input-action-btn" id="applyInputs" type="button">Apply</button>
+          </div>
+        </aside>
+
+        <div class="table-area">
+          <div class="table-tabs" role="tablist" aria-label="Financial tables">
+            <button class="table-tab is-active" type="button" role="tab" aria-selected="true" data-table-tab="investments">Initial Investments</button>
+            <button class="table-tab" type="button" role="tab" aria-selected="false" data-table-tab="summary">Summary Income Statement</button>
+            <span class="table-tabs-spacer" aria-hidden="true"></span>
+            <label class="table-search-btn" for="tableSearchInput" role="search">
+              <img class="table-search-icon" src="assets/search.svg" alt="" aria-hidden="true">
+              <input
+                class="table-search-input"
+                id="tableSearchInput"
+                type="search"
+                inputmode="search"
+                autocomplete="off"
+                placeholder="Search in across tables..."
+                aria-label="Search financial table rows"
+              >
+              <button class="table-search-clear" id="tableSearchClear" type="button" aria-label="Clear search" hidden></button>
+            </label>
+          </div>
+
+          <div class="table-body">
+          <div class="scroll table-panel" data-table-panel="investments">
+            <table class="summary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-scenario">
+                <col class="col-scenario">
+                <col class="col-scenario">
+                <col class="col-scenario">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="col-label">
+                    <span class="title">Initial Investments (Input Costs)</span>
+                  </th>
+                  <th class="col-unit"></th>
+                  <th class="col-scenario">Low</th>
+                  <th class="col-scenario">Mid</th>
+                  <th class="col-scenario">High</th>
+                  <th class="col-scenario">Effective</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label">Development Fee</td>
+                  <td class="col-unit">$</td>
+                  <td class="value">0</td>
+                  <td class="value">0</td>
+                  <td class="value">0</td>
+                  <td class="value">0</td>
+                </tr>
+                <tr>
+                  <td class="label">Franchise Fee</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">30,000</td>
+                  <td class="value">30,000</td>
+                  <td class="value assumption">30,000</td>
+                  <td class="value">30,000</td>
+                </tr>
+                <tr>
+                  <td class="label">Training Expenses</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">200</td>
+                  <td class="value">250</td>
+                  <td class="value assumption">300</td>
+                  <td class="value">250</td>
+                </tr>
+                <tr>
+                  <td class="label">Client Account Purchases</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">0</td>
+                  <td class="value">0</td>
+                  <td class="value assumption">1,050,000</td>
+                  <td class="value">0</td>
+                </tr>
+                <tr>
+                  <td class="label">Leasehold Improvements and Deposits</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">0</td>
+                  <td class="value">750</td>
+                  <td class="value assumption">1,500</td>
+                  <td class="value">750</td>
+                </tr>
+                <tr>
+                  <td class="label">Furniture, Fixtures and Equipment</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">0</td>
+                  <td class="value">500</td>
+                  <td class="value assumption">1,000</td>
+                  <td class="value">500</td>
+                </tr>
+                <tr>
+                  <td class="label">Office Rent and Utilities (1 Month)</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">0</td>
+                  <td class="value">1,000</td>
+                  <td class="value assumption">2,000</td>
+                  <td class="value">1,000</td>
+                </tr>
+                <tr>
+                  <td class="label">Office Equipment, Computer Hardware</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">2,600</td>
+                  <td class="value">4,550</td>
+                  <td class="value assumption">6,500</td>
+                  <td class="value">4,550</td>
+                </tr>
+                <tr>
+                  <td class="label">Initial Launch Marketing</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">3,000</td>
+                  <td class="value">3,000</td>
+                  <td class="value assumption">3,000</td>
+                  <td class="value">3,000</td>
+                </tr>
+                <tr>
+                  <td class="label">Insurance</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">500</td>
+                  <td class="value">1,000</td>
+                  <td class="value assumption">1,500</td>
+                  <td class="value">1,000</td>
+                </tr>
+                <tr>
+                  <td class="label">Additional Funds (3 Months)</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">23,750</td>
+                  <td class="value">31,250</td>
+                  <td class="value assumption">38,750</td>
+                  <td class="value">31,250</td>
+                </tr>
+                <tr>
+                  <td class="label">Licenses &amp; Permits</td>
+                  <td class="col-unit"></td>
+                  <td class="value assumption"></td>
+                  <td class="value"></td>
+                  <td class="value assumption"></td>
+                  <td class="value"></td>
+                </tr>
+                <tr>
+                  <td class="label">Miscellaneous</td>
+                  <td class="col-unit"></td>
+                  <td class="value assumption"></td>
+                  <td class="value"></td>
+                  <td class="value assumption"></td>
+                  <td class="value"></td>
+                </tr>
+                <tr class="highlight">
+                  <td class="label">Total Franchise Setup Costs</td>
+                  <td class="col-unit">$</td>
+                  <td class="value">60,050</td>
+                  <td class="value">72,300</td>
+                  <td class="value">1,134,550</td>
+                  <td class="value">72,300</td>
+                </tr>
+                <tr class="section">
+                  <td>Deal Expenses</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="label">(+) Working Capital (3 Months)</td>
+                  <td class="col-unit">$</td>
+                  <td class="value assumption">25,000</td>
+                  <td class="value">32,500</td>
+                  <td class="value assumption">40,000</td>
+                  <td class="value">32,500</td>
+                </tr>
+                <tr>
+                  <td class="label">(+) SBA Guaranty Fee &amp; Others</td>
+                  <td class="col-unit">$</td>
+                  <td class="value">3,003</td>
+                  <td class="value">3,615</td>
+                  <td class="value">56,728</td>
+                  <td class="value">3,615</td>
+                </tr>
+                <tr class="highlight">
+                  <td class="label">Total Project Costs</td>
+                  <td class="col-unit">$</td>
+                  <td class="value">88,053</td>
+                  <td class="value">108,415</td>
+                  <td class="value">1,231,278</td>
+                  <td class="value">108,415</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="scroll table-panel" data-table-panel="summary" hidden>
+            <table class="summary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+              </colgroup>
+              <thead>
+                <tr class="summary-title-row">
+                  <th colspan="11">Summary Income Statement</th>
+                </tr>
+                <tr class="summary-period-row">
+                  <th class="col-label">Year</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">Year 1</th>
+                  <th class="col-year">Year 2</th>
+                  <th class="col-year">Year 3</th>
+                  <th class="col-year">Year 4</th>
+                  <th class="col-year">Year 5</th>
+                  <th class="col-year">Year 6</th>
+                  <th class="col-year">Year 7</th>
+                  <th class="col-year">Year 8</th>
+                  <th class="col-year">Year 9</th>
+                </tr>
+                <tr class="summary-period-row summary-period-row--last">
+                  <th class="col-label">All numbers in US$ unless otherwise stated</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">2026</th>
+                  <th class="col-year">2027</th>
+                  <th class="col-year">2028</th>
+                  <th class="col-year">2029</th>
+                  <th class="col-year">2030</th>
+                  <th class="col-year">2031</th>
+                  <th class="col-year">2032</th>
+                  <th class="col-year">2033</th>
+                  <th class="col-year">2034</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="strong">
+                  <td class="label">Gross Annual Sales</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                  <td class="value" data-row="grossAnnualSales"></td>
+                </tr>
+                <tr class="metric">
+                  <td class="label">Growth Rate (%)</td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                  <td class="value" data-row="growthRates"></td>
+                </tr>
+                <tr>
+                  <td class="label">Total Franchise Expenses</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                  <td class="value" data-row="totalFranchiseExpenses"></td>
+                </tr>
+                <tr class="highlight">
+                  <td class="label">Net Annual Sales</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                  <td class="value" data-row="netAnnualSales"></td>
+                </tr>
+                <tr>
+                  <td class="label">Total Cost of Sales</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                  <td class="value" data-row="totalCostOfSales"></td>
+                </tr>
+                <tr class="highlight">
+                  <td class="label">Gross Profit</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                  <td class="value" data-row="grossProfit"></td>
+                </tr>
+                <tr class="metric">
+                  <td class="label">Gross Profit Margin (%)</td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                  <td class="value" data-row="grossProfitMargin"></td>
+                </tr>
+                <tr class="highlight">
+                  <td class="label">Adjusted EBITDA (Inc. Executive Compensation)</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                  <td class="value" data-row="adjustedEbitda"></td>
+                </tr>
+                <tr class="metric">
+                  <td class="label">Adjusted EBITDA Margin (%)</td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                  <td class="value" data-row="adjustedEbitdaMargin"></td>
+                </tr>
+                <tr class="highlight total">
+                  <td class="label">Net Income</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                  <td class="value" data-row="netIncome"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="summary summary-secondary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+              </colgroup>
+              <thead>
+                <tr class="summary-title-row">
+                  <th colspan="11">Summary Cashflow Waterfall</th>
+                </tr>
+                <tr class="summary-period-row">
+                  <th class="col-label">Active Year</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">Year 1</th>
+                  <th class="col-year">Year 2</th>
+                  <th class="col-year">Year 3</th>
+                  <th class="col-year">Year 4</th>
+                  <th class="col-year">Year 5</th>
+                  <th class="col-year">Year 6</th>
+                  <th class="col-year">Year 7</th>
+                  <th class="col-year">Year 8</th>
+                  <th class="col-year">Year 9</th>
+                </tr>
+                <tr class="summary-period-row summary-period-row--last">
+                  <th class="col-label">All numbers in US$ unless otherwise stated</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">2026</th>
+                  <th class="col-year">2027</th>
+                  <th class="col-year">2028</th>
+                  <th class="col-year">2029</th>
+                  <th class="col-year">2030</th>
+                  <th class="col-year">2031</th>
+                  <th class="col-year">2032</th>
+                  <th class="col-year">2033</th>
+                  <th class="col-year">2034</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label">Unlevered FCF Available to Lenders</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                  <td class="value" data-row="unleveredFcf"></td>
+                </tr>
+                <tr>
+                  <td class="label">Less: Annual Debt Financing Expenses</td>
+                  <td class="col-unit negative">$</td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                  <td class="value negative" data-row="debtFinancing"></td>
+                </tr>
+                <tr class="highlight">
+                  <td class="label">Levered FCF Available to Equity Holders Before Exit</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                  <td class="value" data-row="leveredFcf"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="summary summary-secondary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+              </colgroup>
+              <thead>
+                <tr class="summary-title-row">
+                  <th colspan="11">Summary Base Note Distribution to Investors</th>
+                </tr>
+                <tr class="summary-period-row">
+                  <th class="col-label">Year</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">Year 1</th>
+                  <th class="col-year">Year 2</th>
+                  <th class="col-year">Year 3</th>
+                  <th class="col-year">Year 4</th>
+                  <th class="col-year">Year 5</th>
+                  <th class="col-year">Year 6</th>
+                  <th class="col-year">Year 7</th>
+                  <th class="col-year">Year 8</th>
+                  <th class="col-year">Year 9</th>
+                </tr>
+                <tr class="summary-period-row summary-period-row--last">
+                  <th class="col-label">All numbers in US$ unless otherwise stated</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">2026</th>
+                  <th class="col-year">2027</th>
+                  <th class="col-year">2028</th>
+                  <th class="col-year">2029</th>
+                  <th class="col-year">2030</th>
+                  <th class="col-year">2031</th>
+                  <th class="col-year">2032</th>
+                  <th class="col-year">2033</th>
+                  <th class="col-year">2034</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label">FCF Distributed to Operator</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                  <td class="value" data-row="fcfOperator"></td>
+                </tr>
+                <tr>
+                  <td class="label">FCF Distributed to Preferred Equity Holders</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                </tr>
+                <tr class="strong">
+                  <td class="label">FCF Distributed (Total)</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                  <td class="value" data-row="fcfTotal"></td>
+                </tr>
+                <tr>
+                  <td class="label">Net Proceeds from Sale Distributed to Operator <span class="inline-assumption">8.4%</span></td>
+                  <td class="col-unit">$</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                </tr>
+                <tr>
+                  <td class="label">Net Proceeds from Sale Distributed to Preferred Equity <span class="inline-assumption">91.6%</span></td>
+                  <td class="col-unit">$</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                </tr>
+                <tr class="strong">
+                  <td class="label">Total Proceeds from Sale Distributed to Investors</td>
+                  <td class="col-unit">$</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="summary summary-secondary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+              </colgroup>
+              <thead>
+                <tr class="summary-title-row">
+                  <th colspan="11">Preferred Equity Return Profile</th>
+                </tr>
+                <tr class="summary-period-row">
+                  <th class="col-label">Year</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">Year 1</th>
+                  <th class="col-year">Year 2</th>
+                  <th class="col-year">Year 3</th>
+                  <th class="col-year">Year 4</th>
+                  <th class="col-year">Year 5</th>
+                  <th class="col-year">Year 6</th>
+                  <th class="col-year">Year 7</th>
+                  <th class="col-year">Year 8</th>
+                  <th class="col-year">Year 9</th>
+                </tr>
+                <tr class="summary-period-row summary-period-row--last">
+                  <th class="col-label">All numbers in US$ unless otherwise stated</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">2026</th>
+                  <th class="col-year">2027</th>
+                  <th class="col-year">2028</th>
+                  <th class="col-year">2029</th>
+                  <th class="col-year">2030</th>
+                  <th class="col-year">2031</th>
+                  <th class="col-year">2032</th>
+                  <th class="col-year">2033</th>
+                  <th class="col-year">2034</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label">FCF Distributed to Preferred Equity Holders</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                  <td class="value" data-row="fcfPreferred"></td>
+                </tr>
+                <tr>
+                  <td class="label">Net Proceeds from Sale Distributed to Preferred Equity</td>
+                  <td class="col-unit">$</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                </tr>
+                <tr class="highlight highlight-return">
+                  <td class="label">Total Distributions to Preferred Equity Holders</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                  <td class="value" data-row="totalDistributionsPreferred"></td>
+                </tr>
+                <tr class="metric highlight-return">
+                  <td class="label">Preferred Equity Yield</td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                  <td class="value" data-row="preferredEquityYield"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="summary summary-secondary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="col-label">
+                    <span class="title">Debt Service Coverage Ratios</span>
+                  </th>
+                  <th class="col-unit"></th>
+                  <th class="col-year">Year 1</th>
+                  <th class="col-year">Year 2</th>
+                  <th class="col-year">Year 3</th>
+                  <th class="col-year">Year 4</th>
+                  <th class="col-year">Year 5</th>
+                  <th class="col-year">Year 6</th>
+                  <th class="col-year">Year 7</th>
+                  <th class="col-year">Year 8</th>
+                  <th class="col-year">Year 9</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label">DSCR</td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                  <td class="value" data-row="dscr"></td>
+                </tr>
+                <tr>
+                  <td class="label">DSCR Compliance <span class="inline-assumption">1.30x</span></td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                  <td class="value" data-row="dscrCompliance"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="summary summary-secondary">
+              <colgroup>
+                <col class="col-label">
+                <col class="col-unit">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+                <col class="col-year">
+              </colgroup>
+              <thead>
+                <tr class="summary-title-row">
+                  <th colspan="11">Individual Investor Return Profile</th>
+                </tr>
+                <tr class="summary-period-row">
+                  <th class="col-label">Year</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">Year 1</th>
+                  <th class="col-year">Year 2</th>
+                  <th class="col-year">Year 3</th>
+                  <th class="col-year">Year 4</th>
+                  <th class="col-year">Year 5</th>
+                  <th class="col-year">Year 6</th>
+                  <th class="col-year">Year 7</th>
+                  <th class="col-year">Year 8</th>
+                  <th class="col-year">Year 9</th>
+                </tr>
+                <tr class="summary-period-row summary-period-row--last">
+                  <th class="col-label">All numbers in US$ unless otherwise stated</th>
+                  <th class="col-unit"></th>
+                  <th class="col-year year-1">2026</th>
+                  <th class="col-year">2027</th>
+                  <th class="col-year">2028</th>
+                  <th class="col-year">2029</th>
+                  <th class="col-year">2030</th>
+                  <th class="col-year">2031</th>
+                  <th class="col-year">2032</th>
+                  <th class="col-year">2033</th>
+                  <th class="col-year">2034</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label">Individual Investor Equity Check Size</td>
+                  <td class="col-unit">$</td>
+                  <td class="value inline-assumption" colspan="9">10,000</td>
+                </tr>
+                <tr>
+                  <td class="label">Individual Investor Equity Check Size (% of Total)</td>
+                  <td class="col-unit"></td>
+                  <td class="value" colspan="9">25.2%</td>
+                </tr>
+                <tr>
+                  <td class="label">Total Preferred Equity Pool</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" colspan="9">39,730</td>
+                </tr>
+                <tr class="highlight highlight-return">
+                  <td class="label">Multiple of Invested Capital (MOIC)</td>
+                  <td class="col-unit"></td>
+                  <td class="value" colspan="9">22.3x</td>
+                </tr>
+                <tr>
+                  <td class="label">FCF Distributed to Preferred Equity Holders</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                  <td class="value" data-row="individualFcfPreferred"></td>
+                </tr>
+                <tr>
+                  <td class="label">Net Proceeds from Sale Distributed to Preferred Equity</td>
+                  <td class="col-unit">$</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                  <td class="value empty">-</td>
+                </tr>
+                <tr class="highlight highlight-return">
+                  <td class="label">Total Distributions to Individual Investor</td>
+                  <td class="col-unit">$</td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                  <td class="value" data-row="totalDistributionsIndividual"></td>
+                </tr>
+                <tr class="metric highlight-return">
+                  <td class="label">Preferred Equity Yield</td>
+                  <td class="col-unit"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                  <td class="value" data-row="individualPreferredEquityYield"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    </main>
+
+    <section class="financial-disclaimer" aria-label="Legal disclaimer">
+      <p>The interactive tool being provided here should not be interpreted as a Financial Performance Representation. We also do not authorize our employees or representatives to make any such representations that differ from what is available in the item 19 either orally or in writing.</p>
+      <p>The FTC&rsquo;s Franchise Rule permits a franchisor to provide information about the actual or potential financial performance of its franchised and/or franchisor-owned outlets, if there is a reasonable basis for the information, and if the information is included in the Franchise Disclosure Document. Financial performance information that differs from that included in Item 19 may be given only if: (1) a franchisor provides the actual records of an existing outlet you are considering buying; or (2) a franchisor supplements the information provided in this Item 19, for example, by providing information about possible performance at a particular location or under particular circumstances.</p>
+    </section>
+
+    <footer class="site-footer">
+      <span>© 2026 wefranch</span>
+    </footer>
+  </div>
+
+  <script src="scripts/model.js"></script>
+  <script src="scripts/app.js"></script>
+  <script>
+    const arrow = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line>
+      <polyline points="9 7 17 7 17 15"></polyline></svg>`;
+    document.querySelectorAll(".year").forEach((el) => {
+      el.insertAdjacentHTML("afterbegin", arrow);
+    });
+  </script>
+</body>
+</html>

@@ -369,17 +369,6 @@ body.is-embed[data-demo-focus="table"] .table-area {
   filter: blur(0);
 }
 
-/* Redact numeric table values in the public demo */
-.table-area .summary td.value:not(:empty),
-.table-area .summary .inline-assumption {
-  color: transparent !important;
-  filter: blur(4px);
-  text-shadow: 0 0 8px rgba(17, 17, 17, 0.65);
-  user-select: none;
-  -webkit-user-select: none;
-  pointer-events: none;
-}
-
 .table-area {
   flex: 1;
   min-width: 0;
