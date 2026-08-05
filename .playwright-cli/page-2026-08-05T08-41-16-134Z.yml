@@ -1,0 +1,239 @@
+- generic [active] [ref=e1]:
+  - main "Financial modeling product demo" [ref=e2]:
+    - iframe [ref=e6]:
+      - generic [ref=f1e2]:
+        - banner "Application header" [ref=f1e3]:
+          - generic [ref=f1e4]:
+            - button "Open menu" [ref=f1e5]
+            - link "Wefranch home" [ref=f1e6] [cursor=pointer]:
+              - /url: ../
+            - navigation "Breadcrumb" [ref=f1e7]:
+              - generic [ref=f1e8]: Financial Modeling
+              - generic [ref=f1e9]: /
+              - generic [ref=f1e10]: Franchise
+              - generic [ref=f1e11]: /
+              - generic [ref=f1e12]: Decimal
+          - button "User menu" [ref=f1e14] [cursor=pointer]
+        - region "Brand" [ref=f1e16]:
+          - img "Decimal" [ref=f1e18]
+          - heading "Decimal" [level=1] [ref=f1e19]
+        - generic:
+          - region:
+            - button:
+              - generic: ×
+            - generic:
+              - heading [level=2]: Manage access
+            - paragraph: Review and respond to requests for access to your financial model.
+            - table:
+              - row:
+                - columnheader: User
+                - columnheader: Access
+              - row:
+                - cell: Adam Boltnier
+                - cell: Approved
+              - row:
+                - cell: Marc Bowen
+                - cell: Approved
+              - row:
+                - cell: Maria Smith
+                - cell: Rejected
+              - row:
+                - cell: David Chen
+                - cell: Approved
+            - generic:
+              - button: Done
+        - main [ref=f1e20]:
+          - generic [ref=f1e21]:
+            - complementary "Model inputs" [ref=f1e22]:
+              - generic [ref=f1e23]:
+                - generic [ref=f1e24]:
+                  - heading "Inputs" [level=2] [ref=f1e25]
+                  - paragraph [ref=f1e26]: Change the values below to customize the financial model.
+                - button "Load sample values" [ref=f1e27] [cursor=pointer]
+                - generic [ref=f1e29]:
+                  - generic [ref=f1e30]: Essentials clients Acquisition
+                  - generic [ref=f1e31]: New Per Month
+                  - spinbutton "Essentials clients Acquisition" [ref=f1e33]: "0.5"
+                - generic [ref=f1e34]:
+                  - generic [ref=f1e35]: Essentials clients Acquisition
+                  - generic [ref=f1e36]: MRR
+                  - generic [ref=f1e37]:
+                    - generic: $
+                    - spinbutton "Essentials clients Acquisition" [ref=f1e38]: "1000"
+                - generic [ref=f1e39]:
+                  - generic [ref=f1e40]: Premium clients Acquisition
+                  - generic [ref=f1e41]: New Per Month
+                  - spinbutton "Premium clients Acquisition" [ref=f1e43]: "0.5"
+                - generic [ref=f1e44]:
+                  - generic [ref=f1e45]: Premium clients Acquisition
+                  - generic [ref=f1e46]: MRR
+                  - generic [ref=f1e47]:
+                    - generic: $
+                    - spinbutton "Premium clients Acquisition" [ref=f1e48]: "2500"
+              - generic [ref=f1e49]:
+                - button "Clear all" [ref=f1e50] [cursor=pointer]
+                - button "Apply" [ref=f1e51] [cursor=pointer]
+            - generic [ref=f1e52]:
+              - tablist "Financial tables" [ref=f1e53]:
+                - tab "Initial Investments" [selected] [ref=f1e54] [cursor=pointer]
+                - tab "Summary Income Statement" [ref=f1e55] [cursor=pointer]
+                - search [ref=f1e56] [cursor=pointer]:
+                  - searchbox "Search financial table rows"
+              - table [ref=f1e60]:
+                - rowgroup [ref=f1e68]:
+                  - row [ref=f1e69]:
+                    - columnheader "Initial Investments (Input Costs)" [ref=f1e70]
+                    - columnheader [ref=f1e72]
+                    - columnheader "Low" [ref=f1e73]
+                    - columnheader "Mid" [ref=f1e74]
+                    - columnheader "High" [ref=f1e75]
+                    - columnheader "Effective" [ref=f1e76]
+                - rowgroup [ref=f1e77]:
+                  - row [ref=f1e78]:
+                    - cell "Development Fee" [ref=f1e79]
+                    - cell "$" [ref=f1e80]
+                    - cell "0" [ref=f1e81]
+                    - cell "0" [ref=f1e82]
+                    - cell "0" [ref=f1e83]
+                    - cell "0" [ref=f1e84]
+                  - row [ref=f1e85]:
+                    - cell "Franchise Fee" [ref=f1e86]
+                    - cell "$" [ref=f1e87]
+                    - cell "30,000" [ref=f1e88]
+                    - cell "30,000" [ref=f1e89]
+                    - cell "30,000" [ref=f1e90]
+                    - cell "30,000" [ref=f1e91]
+                  - row [ref=f1e92]:
+                    - cell "Training Expenses" [ref=f1e93]
+                    - cell "$" [ref=f1e94]
+                    - cell "200" [ref=f1e95]
+                    - cell "250" [ref=f1e96]
+                    - cell "300" [ref=f1e97]
+                    - cell "250" [ref=f1e98]
+                  - row [ref=f1e99]:
+                    - cell "Client Account Purchases" [ref=f1e100]
+                    - cell "$" [ref=f1e101]
+                    - cell "0" [ref=f1e102]
+                    - cell "0" [ref=f1e103]
+                    - cell "1,050,000" [ref=f1e104]
+                    - cell "0" [ref=f1e105]
+                  - row [ref=f1e106]:
+                    - cell "Leasehold Improvements and Deposits" [ref=f1e107]
+                    - cell "$" [ref=f1e108]
+                    - cell "0" [ref=f1e109]
+                    - cell "750" [ref=f1e110]
+                    - cell "1,500" [ref=f1e111]
+                    - cell "750" [ref=f1e112]
+                  - row [ref=f1e113]:
+                    - cell "Furniture, Fixtures and Equipment" [ref=f1e114]
+                    - cell "$" [ref=f1e115]
+                    - cell "0" [ref=f1e116]
+                    - cell "500" [ref=f1e117]
+                    - cell "1,000" [ref=f1e118]
+                    - cell "500" [ref=f1e119]
+                  - row [ref=f1e120]:
+                    - cell "Office Rent and Utilities (1 Month)" [ref=f1e121]
+                    - cell "$" [ref=f1e122]
+                    - cell "0" [ref=f1e123]
+                    - cell "1,000" [ref=f1e124]
+                    - cell "2,000" [ref=f1e125]
+                    - cell "1,000" [ref=f1e126]
+                  - row [ref=f1e127]:
+                    - cell "Office Equipment, Computer Hardware" [ref=f1e128]
+                    - cell "$" [ref=f1e129]
+                    - cell "2,600" [ref=f1e130]
+                    - cell "4,550" [ref=f1e131]
+                    - cell "6,500" [ref=f1e132]
+                    - cell "4,550" [ref=f1e133]
+                  - row [ref=f1e134]:
+                    - cell "Initial Launch Marketing" [ref=f1e135]
+                    - cell "$" [ref=f1e136]
+                    - cell "3,000" [ref=f1e137]
+                    - cell "3,000" [ref=f1e138]
+                    - cell "3,000" [ref=f1e139]
+                    - cell "3,000" [ref=f1e140]
+                  - row [ref=f1e141]:
+                    - cell "Insurance" [ref=f1e142]
+                    - cell "$" [ref=f1e143]
+                    - cell "500" [ref=f1e144]
+                    - cell "1,000" [ref=f1e145]
+                    - cell "1,500" [ref=f1e146]
+                    - cell "1,000" [ref=f1e147]
+                  - row [ref=f1e148]:
+                    - cell "Additional Funds (3 Months)" [ref=f1e149]
+                    - cell "$" [ref=f1e150]
+                    - cell "23,750" [ref=f1e151]
+                    - cell "31,250" [ref=f1e152]
+                    - cell "38,750" [ref=f1e153]
+                    - cell "31,250" [ref=f1e154]
+                  - row [ref=f1e155]:
+                    - cell "Licenses & Permits" [ref=f1e156]
+                    - cell [ref=f1e157]
+                    - cell [ref=f1e158]
+                    - cell [ref=f1e159]
+                    - cell [ref=f1e160]
+                    - cell [ref=f1e161]
+                  - row [ref=f1e162]:
+                    - cell "Miscellaneous" [ref=f1e163]
+                    - cell [ref=f1e164]
+                    - cell [ref=f1e165]
+                    - cell [ref=f1e166]
+                    - cell [ref=f1e167]
+                    - cell [ref=f1e168]
+                  - row [ref=f1e169]:
+                    - cell "Total Franchise Setup Costs" [ref=f1e170]
+                    - cell "$" [ref=f1e171]
+                    - cell "60,050" [ref=f1e172]
+                    - cell "72,300" [ref=f1e173]
+                    - cell "1,134,550" [ref=f1e174]
+                    - cell "72,300" [ref=f1e175]
+                  - row [ref=f1e176]:
+                    - cell "Deal Expenses" [ref=f1e177]
+                    - cell [ref=f1e178]
+                    - cell [ref=f1e179]
+                    - cell [ref=f1e180]
+                    - cell [ref=f1e181]
+                    - cell [ref=f1e182]
+                  - row [ref=f1e183]:
+                    - cell "(+) Working Capital (3 Months)" [ref=f1e184]
+                    - cell "$" [ref=f1e185]
+                    - cell "25,000" [ref=f1e186]
+                    - cell "32,500" [ref=f1e187]
+                    - cell "40,000" [ref=f1e188]
+                    - cell "32,500" [ref=f1e189]
+                  - row [ref=f1e190]:
+                    - cell "(+) SBA Guaranty Fee & Others" [ref=f1e191]
+                    - cell "$" [ref=f1e192]
+                    - cell "3,003" [ref=f1e193]
+                    - cell "3,615" [ref=f1e194]
+                    - cell "56,728" [ref=f1e195]
+                    - cell "3,615" [ref=f1e196]
+                  - row [ref=f1e197]:
+                    - cell "Total Project Costs" [ref=f1e198]
+                    - cell "$" [ref=f1e199]
+                    - cell "88,053" [ref=f1e200]
+                    - cell "108,415" [ref=f1e201]
+                    - cell "1,231,278" [ref=f1e202]
+                    - cell "108,415" [ref=f1e203]
+    - region:
+      - generic:
+        - generic:
+          - heading [level=2]:
+            - generic:
+              - generic: Matt
+              - generic: Tait
+          - paragraph:
+            - generic: Decimal,
+            - generic:
+              - generic: Founder
+              - generic: "&"
+              - generic: CEO
+  - group "Video controls" [ref=e7]:
+    - generic [ref=e8]:
+      - button "Play animation" [ref=e9] [cursor=pointer]
+      - generic "Playback time" [ref=e10]:
+        - generic [ref=e11]: 0:00
+        - generic [ref=e12]: /
+        - generic [ref=e13]: 2:47
+    - slider "Video timeline" [ref=e14] [cursor=pointer]
+    - button "Mute audio" [ref=e15] [cursor=pointer]

@@ -1,0 +1,731 @@
+- generic [ref=e1]:
+  - main "Financial modeling product demo" [ref=e2]:
+    - iframe [ref=e6]:
+      - generic [ref=f1e2]:
+        - banner "Application header" [ref=f1e3]:
+          - generic [ref=f1e4]:
+            - button "Open menu" [ref=f1e5]
+            - link "Wefranch home" [ref=f1e6] [cursor=pointer]:
+              - /url: ../
+            - navigation "Breadcrumb" [ref=f1e7]:
+              - generic [ref=f1e8]: Financial Modeling
+              - generic [ref=f1e9]: /
+              - generic [ref=f1e10]: Franchise
+              - generic [ref=f1e11]: /
+              - generic [ref=f1e12]: Decimal
+          - button "User menu" [ref=f1e14] [cursor=pointer]
+        - region "Brand" [ref=f1e16]:
+          - img "Decimal" [ref=f1e18]
+          - heading "Decimal" [level=1] [ref=f1e19]
+        - generic:
+          - region:
+            - button:
+              - generic: ×
+            - generic:
+              - heading [level=2]: Manage access
+            - paragraph: Review and respond to requests for access to your financial model.
+            - table:
+              - row:
+                - columnheader: User
+                - columnheader: Access
+              - row:
+                - cell: Adam Boltnier
+                - cell: Approved
+              - row:
+                - cell: Marc Bowen
+                - cell: Approved
+              - row:
+                - cell: Maria Smith
+                - cell: Rejected
+              - row:
+                - cell: David Chen
+                - cell: Approved
+            - generic:
+              - button: Done
+        - main [ref=f1e20]:
+          - generic [ref=f1e21]:
+            - complementary "Model inputs" [ref=f1e22]:
+              - generic [ref=f1e23]:
+                - generic [ref=f1e24]:
+                  - heading "Inputs" [level=2] [ref=f1e25]
+                  - paragraph [ref=f1e26]: Change the values below to customize the financial model.
+                - button "Load sample values" [ref=f1e27] [cursor=pointer]
+                - generic [ref=f1e29]:
+                  - generic [ref=f1e30]: Essentials clients Acquisition
+                  - generic [ref=f1e31]: New Per Month
+                  - spinbutton "Essentials clients Acquisition" [ref=f1e33]: "0.5"
+                - generic [ref=f1e34]:
+                  - generic [ref=f1e35]: Essentials clients Acquisition
+                  - generic [ref=f1e36]: MRR
+                  - generic [ref=f1e37]:
+                    - generic: $
+                    - spinbutton "Essentials clients Acquisition" [ref=f1e38]: "1000"
+                - generic [ref=f1e39]:
+                  - generic [ref=f1e40]: Premium clients Acquisition
+                  - generic [ref=f1e41]: New Per Month
+                  - spinbutton "Premium clients Acquisition" [ref=f1e43]: "0.5"
+                - generic [ref=f1e44]:
+                  - generic [ref=f1e45]: Premium clients Acquisition
+                  - generic [ref=f1e46]: MRR
+                  - generic [ref=f1e47]:
+                    - generic: $
+                    - spinbutton "Premium clients Acquisition" [ref=f1e48]: "2500"
+              - generic [ref=f1e49]:
+                - button "Clear all" [ref=f1e50] [cursor=pointer]
+                - button "Apply" [ref=f1e51] [cursor=pointer]
+            - generic [ref=f1e52]:
+              - tablist "Financial tables" [ref=f1e53]:
+                - tab "Initial Investments" [ref=f1e54] [cursor=pointer]
+                - tab "Summary Income Statement" [selected] [ref=f1e55] [cursor=pointer]
+                - search [ref=f1e56] [cursor=pointer]:
+                  - searchbox "Search financial table rows"
+              - generic [ref=f1e204]:
+                - table [ref=f1e205]:
+                  - rowgroup [ref=f1e218]:
+                    - row [ref=f1e219]:
+                      - columnheader "Summary Income Statement" [ref=f1e220]
+                    - row [ref=f1e221]:
+                      - columnheader "Year" [ref=f1e222]
+                      - columnheader [ref=f1e223]
+                      - columnheader "Year 1" [ref=f1e224]
+                      - columnheader "Year 2" [ref=f1e225]
+                      - columnheader "Year 3" [ref=f1e226]
+                      - columnheader "Year 4" [ref=f1e227]
+                      - columnheader "Year 5" [ref=f1e228]
+                      - columnheader "Year 6" [ref=f1e229]
+                      - columnheader "Year 7" [ref=f1e230]
+                      - columnheader "Year 8" [ref=f1e231]
+                      - columnheader "Year 9" [ref=f1e232]
+                    - row [ref=f1e233]:
+                      - columnheader "All numbers in US$ unless otherwise stated" [ref=f1e234]
+                      - columnheader [ref=f1e235]
+                      - columnheader "2026" [ref=f1e236]
+                      - columnheader "2027" [ref=f1e237]
+                      - columnheader "2028" [ref=f1e238]
+                      - columnheader "2029" [ref=f1e239]
+                      - columnheader "2030" [ref=f1e240]
+                      - columnheader "2031" [ref=f1e241]
+                      - columnheader "2032" [ref=f1e242]
+                      - columnheader "2033" [ref=f1e243]
+                      - columnheader "2034" [ref=f1e244]
+                  - rowgroup [ref=f1e245]:
+                    - row [ref=f1e246]:
+                      - cell "Gross Annual Sales" [ref=f1e247]
+                      - cell "$" [ref=f1e248]
+                      - cell "160,650" [ref=f1e249]
+                      - cell "412,650" [ref=f1e250]
+                      - cell "664,650" [ref=f1e251]
+                      - cell "916,650" [ref=f1e252]
+                      - cell "1,168,650" [ref=f1e253]
+                      - cell "1,420,650" [ref=f1e254]
+                      - cell "1,672,650" [ref=f1e255]
+                      - cell "1,924,650" [ref=f1e256]
+                      - cell "2,176,650" [ref=f1e257]
+                    - row [ref=f1e258]:
+                      - cell "Growth Rate (%)" [ref=f1e259]
+                      - cell [ref=f1e260]
+                      - cell [ref=f1e261]
+                      - cell "156.86%" [ref=f1e262]
+                      - cell "61.07%" [ref=f1e263]
+                      - cell "37.91%" [ref=f1e264]
+                      - cell "27.49%" [ref=f1e265]
+                      - cell "21.56%" [ref=f1e266]
+                      - cell "17.74%" [ref=f1e267]
+                      - cell "15.07%" [ref=f1e268]
+                      - cell "13.09%" [ref=f1e269]
+                    - row [ref=f1e270]:
+                      - cell "Total Franchise Expenses" [ref=f1e271]
+                      - cell "$" [ref=f1e272]
+                      - cell "22,121" [ref=f1e273]
+                      - cell "52,361" [ref=f1e274]
+                      - cell "82,601" [ref=f1e275]
+                      - cell "112,841" [ref=f1e276]
+                      - cell "143,081" [ref=f1e277]
+                      - cell "173,321" [ref=f1e278]
+                      - cell "203,561" [ref=f1e279]
+                      - cell "233,801" [ref=f1e280]
+                      - cell "264,041" [ref=f1e281]
+                    - row [ref=f1e282]:
+                      - cell "Net Annual Sales" [ref=f1e283]
+                      - cell "$" [ref=f1e284]
+                      - cell "138,530" [ref=f1e285]
+                      - cell "360,290" [ref=f1e286]
+                      - cell "582,050" [ref=f1e287]
+                      - cell "803,810" [ref=f1e288]
+                      - cell "1,025,570" [ref=f1e289]
+                      - cell "1,247,330" [ref=f1e290]
+                      - cell "1,469,090" [ref=f1e291]
+                      - cell "1,690,850" [ref=f1e292]
+                      - cell "1,912,610" [ref=f1e293]
+                    - row [ref=f1e294]:
+                      - cell "Total Cost of Sales" [ref=f1e295]
+                      - cell "$" [ref=f1e296]
+                      - cell "89,625" [ref=f1e297]
+                      - cell "195,795" [ref=f1e298]
+                      - cell "314,865" [ref=f1e299]
+                      - cell "403,485" [ref=f1e300]
+                      - cell "492,105" [ref=f1e301]
+                      - cell "731,325" [ref=f1e302]
+                      - cell "811,495" [ref=f1e303]
+                      - cell "950,865" [ref=f1e304]
+                      - cell "1,029,335" [ref=f1e305]
+                    - row [ref=f1e306]:
+                      - cell "Gross Profit" [ref=f1e307]
+                      - cell "$" [ref=f1e308]
+                      - cell "48,905" [ref=f1e309]
+                      - cell "164,495" [ref=f1e310]
+                      - cell "267,185" [ref=f1e311]
+                      - cell "400,325" [ref=f1e312]
+                      - cell "533,465" [ref=f1e313]
+                      - cell "516,005" [ref=f1e314]
+                      - cell "657,595" [ref=f1e315]
+                      - cell "739,985" [ref=f1e316]
+                      - cell "883,275" [ref=f1e317]
+                    - row [ref=f1e318]:
+                      - cell "Gross Profit Margin (%)" [ref=f1e319]
+                      - cell [ref=f1e320]
+                      - cell "30.4%" [ref=f1e321]
+                      - cell "39.9%" [ref=f1e322]
+                      - cell "40.2%" [ref=f1e323]
+                      - cell "43.7%" [ref=f1e324]
+                      - cell "45.6%" [ref=f1e325]
+                      - cell "36.3%" [ref=f1e326]
+                      - cell "39.3%" [ref=f1e327]
+                      - cell "38.4%" [ref=f1e328]
+                      - cell "40.6%" [ref=f1e329]
+                    - row [ref=f1e330]:
+                      - cell "Adjusted EBITDA (Inc. Executive Compensation)" [ref=f1e331]
+                      - cell "$" [ref=f1e332]
+                      - cell "4,283" [ref=f1e333]
+                      - cell "107,471" [ref=f1e334]
+                      - cell "198,959" [ref=f1e335]
+                      - cell "316,817" [ref=f1e336]
+                      - cell "440,675" [ref=f1e337]
+                      - cell "400,473" [ref=f1e338]
+                      - cell "532,521" [ref=f1e339]
+                      - cell "602,429" [ref=f1e340]
+                      - cell "731,077" [ref=f1e341]
+                    - row [ref=f1e342]:
+                      - cell "Adjusted EBITDA Margin (%)" [ref=f1e343]
+                      - cell [ref=f1e344]
+                      - cell "2.7%" [ref=f1e345]
+                      - cell "26.0%" [ref=f1e346]
+                      - cell "29.9%" [ref=f1e347]
+                      - cell "34.6%" [ref=f1e348]
+                      - cell "37.7%" [ref=f1e349]
+                      - cell "28.2%" [ref=f1e350]
+                      - cell "31.8%" [ref=f1e351]
+                      - cell "31.3%" [ref=f1e352]
+                      - cell "33.6%" [ref=f1e353]
+                    - row [ref=f1e354]:
+                      - cell "Net Income" [ref=f1e355]
+                      - cell "$" [ref=f1e356]
+                      - cell "(9,909)" [ref=f1e357]
+                      - cell "72,052" [ref=f1e358]
+                      - cell "141,039" [ref=f1e359]
+                      - cell "229,843" [ref=f1e360]
+                      - cell "323,192" [ref=f1e361]
+                      - cell "293,545" [ref=f1e362]
+                      - cell "393,139" [ref=f1e363]
+                      - cell "446,188" [ref=f1e364]
+                      - cell "543,359" [ref=f1e365]
+                - table [ref=f1e366]:
+                  - rowgroup [ref=f1e379]:
+                    - row [ref=f1e380]:
+                      - columnheader "Summary Cashflow Waterfall" [ref=f1e381]
+                    - row [ref=f1e382]:
+                      - columnheader "Active Year" [ref=f1e383]
+                      - columnheader [ref=f1e384]
+                      - columnheader "Year 1" [ref=f1e385]
+                      - columnheader "Year 2" [ref=f1e386]
+                      - columnheader "Year 3" [ref=f1e387]
+                      - columnheader "Year 4" [ref=f1e388]
+                      - columnheader "Year 5" [ref=f1e389]
+                      - columnheader "Year 6" [ref=f1e390]
+                      - columnheader "Year 7" [ref=f1e391]
+                      - columnheader "Year 8" [ref=f1e392]
+                      - columnheader "Year 9" [ref=f1e393]
+                    - row [ref=f1e394]:
+                      - columnheader "All numbers in US$ unless otherwise stated" [ref=f1e395]
+                      - columnheader [ref=f1e396]
+                      - columnheader "2026" [ref=f1e397]
+                      - columnheader "2027" [ref=f1e398]
+                      - columnheader "2028" [ref=f1e399]
+                      - columnheader "2029" [ref=f1e400]
+                      - columnheader "2030" [ref=f1e401]
+                      - columnheader "2031" [ref=f1e402]
+                      - columnheader "2032" [ref=f1e403]
+                      - columnheader "2033" [ref=f1e404]
+                      - columnheader "2034" [ref=f1e405]
+                  - rowgroup [ref=f1e406]:
+                    - row [ref=f1e407]:
+                      - cell "Unlevered FCF Available to Lenders" [ref=f1e408]
+                      - cell "$" [ref=f1e409]
+                      - cell "(3,060)" [ref=f1e410]
+                      - cell "78,480" [ref=f1e411]
+                      - cell "146,944" [ref=f1e412]
+                      - cell "235,220" [ref=f1e413]
+                      - cell "328,009" [ref=f1e414]
+                      - cell "297,629" [ref=f1e415]
+                      - cell "396,472" [ref=f1e416]
+                      - cell "448,755" [ref=f1e417]
+                      - cell "544,957" [ref=f1e418]
+                    - row [ref=f1e419]:
+                      - 'cell "Less: Annual Debt Financing Expenses" [ref=f1e420]'
+                      - cell "$" [ref=f1e421]
+                      - cell "(11,007)" [ref=f1e422]
+                      - cell "(11,007)" [ref=f1e423]
+                      - cell "(11,007)" [ref=f1e424]
+                      - cell "(11,007)" [ref=f1e425]
+                      - cell "(11,007)" [ref=f1e426]
+                      - cell "(11,007)" [ref=f1e427]
+                      - cell "(11,007)" [ref=f1e428]
+                      - cell "(11,007)" [ref=f1e429]
+                      - cell "(11,007)" [ref=f1e430]
+                    - row [ref=f1e431]:
+                      - cell "Levered FCF Available to Equity Holders Before Exit" [ref=f1e432]
+                      - cell "$" [ref=f1e433]
+                      - cell "(14,067)" [ref=f1e434]
+                      - cell "67,473" [ref=f1e435]
+                      - cell "135,937" [ref=f1e436]
+                      - cell "224,213" [ref=f1e437]
+                      - cell "317,002" [ref=f1e438]
+                      - cell "286,622" [ref=f1e439]
+                      - cell "385,465" [ref=f1e440]
+                      - cell "437,748" [ref=f1e441]
+                      - cell "533,950" [ref=f1e442]
+                - table [ref=f1e443]:
+                  - rowgroup [ref=f1e456]:
+                    - row [ref=f1e457]:
+                      - columnheader "Summary Base Note Distribution to Investors" [ref=f1e458]
+                    - row [ref=f1e459]:
+                      - columnheader "Year" [ref=f1e460]
+                      - columnheader [ref=f1e461]
+                      - columnheader "Year 1" [ref=f1e462]
+                      - columnheader "Year 2" [ref=f1e463]
+                      - columnheader "Year 3" [ref=f1e464]
+                      - columnheader "Year 4" [ref=f1e465]
+                      - columnheader "Year 5" [ref=f1e466]
+                      - columnheader "Year 6" [ref=f1e467]
+                      - columnheader "Year 7" [ref=f1e468]
+                      - columnheader "Year 8" [ref=f1e469]
+                      - columnheader "Year 9" [ref=f1e470]
+                    - row [ref=f1e471]:
+                      - columnheader "All numbers in US$ unless otherwise stated" [ref=f1e472]
+                      - columnheader [ref=f1e473]
+                      - columnheader "2026" [ref=f1e474]
+                      - columnheader "2027" [ref=f1e475]
+                      - columnheader "2028" [ref=f1e476]
+                      - columnheader "2029" [ref=f1e477]
+                      - columnheader "2030" [ref=f1e478]
+                      - columnheader "2031" [ref=f1e479]
+                      - columnheader "2032" [ref=f1e480]
+                      - columnheader "2033" [ref=f1e481]
+                      - columnheader "2034" [ref=f1e482]
+                  - rowgroup [ref=f1e483]:
+                    - row [ref=f1e484]:
+                      - cell "FCF Distributed to Operator" [ref=f1e485]
+                      - cell "$" [ref=f1e486]
+                      - cell "(1)" [ref=f1e487]
+                      - cell "22,150" [ref=f1e488]
+                      - cell "104,194" [ref=f1e489]
+                      - cell "155,555" [ref=f1e490]
+                      - cell "220,110" [ref=f1e491]
+                      - cell "200,237" [ref=f1e492]
+                      - cell "266,261" [ref=f1e493]
+                      - cell "301,215" [ref=f1e494]
+                      - cell "304,450" [ref=f1e495]
+                    - row [ref=f1e496]:
+                      - cell "FCF Distributed to Preferred Equity Holders" [ref=f1e497]
+                      - cell "$" [ref=f1e498]
+                      - cell "(7,772)" [ref=f1e499]
+                      - cell "69,106" [ref=f1e500]
+                      - cell "91,353" [ref=f1e501]
+                      - cell "137,214" [ref=f1e502]
+                      - cell "142,447" [ref=f1e503]
+                      - cell "130,112" [ref=f1e504]
+                      - cell "171,117" [ref=f1e505]
+                      - cell "197,000" [ref=f1e506]
+                      - cell "176,105" [ref=f1e507]
+                    - row [ref=f1e508]:
+                      - cell "FCF Distributed (Total)" [ref=f1e509]
+                      - cell "$" [ref=f1e510]
+                      - cell "(7,773)" [ref=f1e511]
+                      - cell "91,256" [ref=f1e512]
+                      - cell "195,547" [ref=f1e513]
+                      - cell "292,769" [ref=f1e514]
+                      - cell "362,557" [ref=f1e515]
+                      - cell "330,349" [ref=f1e516]
+                      - cell "437,378" [ref=f1e517]
+                      - cell "498,214" [ref=f1e518]
+                      - cell "533,951" [ref=f1e519]
+                    - row [ref=f1e520]:
+                      - cell "Net Proceeds from Sale Distributed to Operator 8.4%" [ref=f1e521]:
+                        - text: Net Proceeds from Sale Distributed to Operator
+                        - generic [ref=f1e522]: 8.4%
+                      - cell "$" [ref=f1e523]
+                      - cell "-" [ref=f1e524]
+                      - cell "-" [ref=f1e525]
+                      - cell "-" [ref=f1e526]
+                      - cell "-" [ref=f1e527]
+                      - cell "-" [ref=f1e528]
+                      - cell "-" [ref=f1e529]
+                      - cell "-" [ref=f1e530]
+                      - cell "-" [ref=f1e531]
+                      - cell "-" [ref=f1e532]
+                    - row [ref=f1e533]:
+                      - cell "Net Proceeds from Sale Distributed to Preferred Equity 91.6%" [ref=f1e534]:
+                        - text: Net Proceeds from Sale Distributed to Preferred Equity
+                        - generic [ref=f1e535]: 91.6%
+                      - cell "$" [ref=f1e536]
+                      - cell "-" [ref=f1e537]
+                      - cell "-" [ref=f1e538]
+                      - cell "-" [ref=f1e539]
+                      - cell "-" [ref=f1e540]
+                      - cell "-" [ref=f1e541]
+                      - cell "-" [ref=f1e542]
+                      - cell "-" [ref=f1e543]
+                      - cell "-" [ref=f1e544]
+                      - cell "-" [ref=f1e545]
+                    - row [ref=f1e546]:
+                      - cell "Total Proceeds from Sale Distributed to Investors" [ref=f1e547]
+                      - cell "$" [ref=f1e548]
+                      - cell "-" [ref=f1e549]
+                      - cell "-" [ref=f1e550]
+                      - cell "-" [ref=f1e551]
+                      - cell "-" [ref=f1e552]
+                      - cell "-" [ref=f1e553]
+                      - cell "-" [ref=f1e554]
+                      - cell "-" [ref=f1e555]
+                      - cell "-" [ref=f1e556]
+                      - cell "-" [ref=f1e557]
+                - table [ref=f1e558]:
+                  - rowgroup [ref=f1e571]:
+                    - row [ref=f1e572]:
+                      - columnheader "Preferred Equity Return Profile" [ref=f1e573]
+                    - row [ref=f1e574]:
+                      - columnheader "Year" [ref=f1e575]
+                      - columnheader [ref=f1e576]
+                      - columnheader "Year 1" [ref=f1e577]
+                      - columnheader "Year 2" [ref=f1e578]
+                      - columnheader "Year 3" [ref=f1e579]
+                      - columnheader "Year 4" [ref=f1e580]
+                      - columnheader "Year 5" [ref=f1e581]
+                      - columnheader "Year 6" [ref=f1e582]
+                      - columnheader "Year 7" [ref=f1e583]
+                      - columnheader "Year 8" [ref=f1e584]
+                      - columnheader "Year 9" [ref=f1e585]
+                    - row [ref=f1e586]:
+                      - columnheader "All numbers in US$ unless otherwise stated" [ref=f1e587]
+                      - columnheader [ref=f1e588]
+                      - columnheader "2026" [ref=f1e589]
+                      - columnheader "2027" [ref=f1e590]
+                      - columnheader "2028" [ref=f1e591]
+                      - columnheader "2029" [ref=f1e592]
+                      - columnheader "2030" [ref=f1e593]
+                      - columnheader "2031" [ref=f1e594]
+                      - columnheader "2032" [ref=f1e595]
+                      - columnheader "2033" [ref=f1e596]
+                      - columnheader "2034" [ref=f1e597]
+                  - rowgroup [ref=f1e598]:
+                    - row [ref=f1e599]:
+                      - cell "FCF Distributed to Preferred Equity Holders" [ref=f1e600]
+                      - cell "$" [ref=f1e601]
+                      - cell "NaN" [ref=f1e602]
+                      - cell "NaN" [ref=f1e603]
+                      - cell "NaN" [ref=f1e604]
+                      - cell "NaN" [ref=f1e605]
+                      - cell "NaN" [ref=f1e606]
+                      - cell "NaN" [ref=f1e607]
+                      - cell "NaN" [ref=f1e608]
+                      - cell "NaN" [ref=f1e609]
+                      - cell "NaN" [ref=f1e610]
+                    - row [ref=f1e611]:
+                      - cell "Net Proceeds from Sale Distributed to Preferred Equity" [ref=f1e612]
+                      - cell "$" [ref=f1e613]
+                      - cell "-" [ref=f1e614]
+                      - cell "-" [ref=f1e615]
+                      - cell "-" [ref=f1e616]
+                      - cell "-" [ref=f1e617]
+                      - cell "-" [ref=f1e618]
+                      - cell "-" [ref=f1e619]
+                      - cell "-" [ref=f1e620]
+                      - cell "-" [ref=f1e621]
+                      - cell "-" [ref=f1e622]
+                    - row [ref=f1e623]:
+                      - cell "Total Distributions to Preferred Equity Holders" [ref=f1e624]
+                      - cell "$" [ref=f1e625]
+                      - cell "(7,772)" [ref=f1e626]
+                      - cell "69,106" [ref=f1e627]
+                      - cell "91,353" [ref=f1e628]
+                      - cell "137,214" [ref=f1e629]
+                      - cell "142,447" [ref=f1e630]
+                      - cell "130,112" [ref=f1e631]
+                      - cell "171,117" [ref=f1e632]
+                      - cell "197,000" [ref=f1e633]
+                      - cell "176,105" [ref=f1e634]
+                    - row [ref=f1e635]:
+                      - cell "Preferred Equity Yield" [ref=f1e636]
+                      - cell [ref=f1e637]
+                      - cell "-19.6%" [ref=f1e638]
+                      - cell "150.9%" [ref=f1e639]
+                      - cell "189.5%" [ref=f1e640]
+                      - cell "186.1%" [ref=f1e641]
+                      - cell "263.1%" [ref=f1e642]
+                      - cell "237.9%" [ref=f1e643]
+                      - cell "320.0%" [ref=f1e644]
+                      - cell "363.3%" [ref=f1e645]
+                      - cell "443.3%" [ref=f1e646]
+                - table [ref=f1e647]:
+                  - rowgroup [ref=f1e660]:
+                    - row [ref=f1e661]:
+                      - columnheader "Debt Service Coverage Ratios" [ref=f1e662]
+                      - columnheader [ref=f1e664]
+                      - columnheader "Year 1" [ref=f1e665]
+                      - columnheader "Year 2" [ref=f1e666]
+                      - columnheader "Year 3" [ref=f1e667]
+                      - columnheader "Year 4" [ref=f1e668]
+                      - columnheader "Year 5" [ref=f1e669]
+                      - columnheader "Year 6" [ref=f1e670]
+                      - columnheader "Year 7" [ref=f1e671]
+                      - columnheader "Year 8" [ref=f1e672]
+                      - columnheader "Year 9" [ref=f1e673]
+                  - rowgroup [ref=f1e674]:
+                    - row [ref=f1e675]:
+                      - cell "DSCR" [ref=f1e676]
+                      - cell [ref=f1e677]
+                      - cell "-0.28x" [ref=f1e678]
+                      - cell "7.13x" [ref=f1e679]
+                      - cell "13.35x" [ref=f1e680]
+                      - cell "21.37x" [ref=f1e681]
+                      - cell "29.80x" [ref=f1e682]
+                      - cell "27.04x" [ref=f1e683]
+                      - cell "36.02x" [ref=f1e684]
+                      - cell "40.77x" [ref=f1e685]
+                      - cell "49.51x" [ref=f1e686]
+                    - row [ref=f1e687]:
+                      - cell "DSCR Compliance 1.30x" [ref=f1e688]:
+                        - text: DSCR Compliance
+                        - generic [ref=f1e689]: 1.30x
+                      - cell [ref=f1e690]
+                      - cell "no" [ref=f1e691]
+                      - cell "yes" [ref=f1e692]
+                      - cell "yes" [ref=f1e693]
+                      - cell "yes" [ref=f1e694]
+                      - cell "yes" [ref=f1e695]
+                      - cell "yes" [ref=f1e696]
+                      - cell "yes" [ref=f1e697]
+                      - cell "yes" [ref=f1e698]
+                      - cell "yes" [ref=f1e699]
+                - table [ref=f1e700]:
+                  - rowgroup [ref=f1e713]:
+                    - row [ref=f1e714]:
+                      - columnheader "Individual Investor Return Profile" [ref=f1e715]
+                    - row [ref=f1e716]:
+                      - columnheader "Year" [ref=f1e717]
+                      - columnheader [ref=f1e718]
+                      - columnheader "Year 1" [ref=f1e719]
+                      - columnheader "Year 2" [ref=f1e720]
+                      - columnheader "Year 3" [ref=f1e721]
+                      - columnheader "Year 4" [ref=f1e722]
+                      - columnheader "Year 5" [ref=f1e723]
+                      - columnheader "Year 6" [ref=f1e724]
+                      - columnheader "Year 7" [ref=f1e725]
+                      - columnheader "Year 8" [ref=f1e726]
+                      - columnheader "Year 9" [ref=f1e727]
+                    - row [ref=f1e728]:
+                      - columnheader "All numbers in US$ unless otherwise stated" [ref=f1e729]
+                      - columnheader [ref=f1e730]
+                      - columnheader "2026" [ref=f1e731]
+                      - columnheader "2027" [ref=f1e732]
+                      - columnheader "2028" [ref=f1e733]
+                      - columnheader "2029" [ref=f1e734]
+                      - columnheader "2030" [ref=f1e735]
+                      - columnheader "2031" [ref=f1e736]
+                      - columnheader "2032" [ref=f1e737]
+                      - columnheader "2033" [ref=f1e738]
+                      - columnheader "2034" [ref=f1e739]
+                  - rowgroup [ref=f1e740]:
+                    - row [ref=f1e741]:
+                      - cell "Individual Investor Equity Check Size" [ref=f1e742]
+                      - cell "$" [ref=f1e743]
+                      - cell "10,000" [ref=f1e744]
+                    - row [ref=f1e745]:
+                      - cell "Individual Investor Equity Check Size (% of Total)" [ref=f1e746]
+                      - cell [ref=f1e747]
+                      - cell "25.2%" [ref=f1e748]
+                    - row [ref=f1e749]:
+                      - cell "Total Preferred Equity Pool" [ref=f1e750]
+                      - cell "$" [ref=f1e751]
+                      - cell "39,730" [ref=f1e752]
+                    - row [ref=f1e753]:
+                      - cell "Multiple of Invested Capital (MOIC)" [ref=f1e754]
+                      - cell [ref=f1e755]
+                      - cell "22.3x" [ref=f1e756]
+                    - row [ref=f1e757]:
+                      - cell "FCF Distributed to Preferred Equity Holders" [ref=f1e758]
+                      - cell "$" [ref=f1e759]
+                      - cell "(1,956)" [ref=f1e760]
+                      - cell "17,386" [ref=f1e761]
+                      - cell "22,982" [ref=f1e762]
+                      - cell "34,578" [ref=f1e763]
+                      - cell "35,897" [ref=f1e764]
+                      - cell "32,788" [ref=f1e765]
+                      - cell "43,121" [ref=f1e766]
+                      - cell "49,644" [ref=f1e767]
+                      - cell "44,410" [ref=f1e768]
+                    - row [ref=f1e769]:
+                      - cell "Net Proceeds from Sale Distributed to Preferred Equity" [ref=f1e770]
+                      - cell "$" [ref=f1e771]
+                      - cell "-" [ref=f1e772]
+                      - cell "-" [ref=f1e773]
+                      - cell "-" [ref=f1e774]
+                      - cell "-" [ref=f1e775]
+                      - cell "-" [ref=f1e776]
+                      - cell "-" [ref=f1e777]
+                      - cell "-" [ref=f1e778]
+                      - cell "-" [ref=f1e779]
+                      - cell "-" [ref=f1e780]
+                    - row [ref=f1e781]:
+                      - cell "Total Distributions to Individual Investor" [ref=f1e782]
+                      - cell "$" [ref=f1e783]
+                      - cell "(1,956)" [ref=f1e784]
+                      - cell "17,386" [ref=f1e785]
+                      - cell "22,982" [ref=f1e786]
+                      - cell "34,578" [ref=f1e787]
+                      - cell "35,897" [ref=f1e788]
+                      - cell "32,788" [ref=f1e789]
+                      - cell "43,121" [ref=f1e790]
+                      - cell "49,644" [ref=f1e791]
+                      - cell "44,410" [ref=f1e792]
+                    - row [ref=f1e793]:
+                      - cell "Preferred Equity Yield" [ref=f1e794]
+                      - cell [ref=f1e795]
+                      - cell "-19.6%" [ref=f1e796]
+                      - cell "150.9%" [ref=f1e797]
+                      - cell "189.5%" [ref=f1e798]
+                      - cell "186.1%" [ref=f1e799]
+                      - cell "263.1%" [ref=f1e800]
+                      - cell "237.9%" [ref=f1e801]
+                      - cell "320.0%" [ref=f1e802]
+                      - cell "363.3%" [ref=f1e803]
+                      - cell "443.3%" [ref=f1e804]
+        - region "Legal disclaimer" [ref=f1e805]:
+          - paragraph [ref=f1e806]: The interactive tool being provided here should not be interpreted as a Financial Performance Representation. We also do not authorize our employees or representatives to make any such representations that differ from what is available in the item 19 either orally or in writing.
+          - paragraph [ref=f1e807]: "The FTC’s Franchise Rule permits a franchisor to provide information about the actual or potential financial performance of its franchised and/or franchisor-owned outlets, if there is a reasonable basis for the information, and if the information is included in the Franchise Disclosure Document. Financial performance information that differs from that included in Item 19 may be given only if: (1) a franchisor provides the actual records of an existing outlet you are considering buying; or (2) a franchisor supplements the information provided in this Item 19, for example, by providing information about possible performance at a particular location or under particular circumstances."
+        - contentinfo [ref=f1e808]:
+          - generic [ref=f1e809]: © 2026 wefranch
+    - generic:
+      - heading "Prospects with access to sellside franchise models 82% faster" [level=1]:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+              - generic:
+                - generic:
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+            - generic: "% faster"
+    - region:
+      - generic:
+        - generic:
+          - heading [level=2]:
+            - generic:
+              - generic: Matt
+              - generic: Tait
+          - paragraph:
+            - generic: Decimal,
+            - generic:
+              - generic: Founder
+              - generic: "&"
+              - generic: CEO
+  - group "Video controls" [ref=e7]:
+    - generic [ref=e8]:
+      - button "Play animation" [ref=e9] [cursor=pointer]
+      - generic "Playback time" [ref=e10]:
+        - generic [ref=e11]: 0:28
+        - generic [ref=e12]: /
+        - generic [ref=e13]: 0:57
+    - slider "Video timeline" [active] [ref=e14] [cursor=pointer]
+    - button "Mute audio" [ref=e15] [cursor=pointer]

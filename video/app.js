@@ -22,6 +22,15 @@ const OUTRO_SLOT_DURATION_MS = 1800;
 const OUTRO_SLOT_TENS_CYCLES = 3;
 const OUTRO_SLOT_ONES_CYCLES = 4;
 const OUTRO_SLOT_ONES_DELAY_MS = 120;
+const TESTIMONIAL_VIDEO_REVEAL_DELAY_MS = 400;
+const TESTIMONIAL_FALLBACK_VIDEO_DURATION_MS = 8000;
+const TESTIMONIAL_EXIT_DURATION_MS = 1000;
+const QUOTE_START_TIME_MS = 43100;
+const QUOTE_REVEAL_DELAY_MS = 250;
+const QUOTE_EXIT_START_TIME_MS = 53000;
+const QUOTE_EXIT_DURATION_MS = 900;
+const FINALE_DARK_BG_HOLD_MS = 3000;
+const FINALE_BRAND_REVEAL_DELAY_MS = 120;
 const INTRO_REVEAL_DELAY_MS = 1200;
 const INTRO_WORD_COUNT = 4;
 const INTRO_WORD_REVEAL_DURATION_MS = 1200;
@@ -99,6 +108,11 @@ const outroStatOnesTrack = document.querySelector(
   '.video-outro__slot[data-slot-column="ones"] .video-outro__slot-track'
 );
 const outroStatValue = document.querySelector(".video-outro__stat-value");
+const testimonial = document.querySelector(".video-testimonial");
+const testimonialVideo = document.getElementById("testimonialVideo");
+const quote = document.querySelector(".video-quote");
+const finaleBackdrop = document.querySelector(".video-finale-backdrop");
+const finaleBrand = document.querySelector(".video-finale-brand");
 const frameShell = document.querySelector(".solution__iframe-shell");
 const frameStage = document.querySelector(".solution__iframe-stage");
 const frame = document.querySelector(".solution__iframe");
@@ -121,7 +135,10 @@ let playbackRunId = 0;
 let isAutoplaying = false;
 let embedCompletionResolver = null;
 let embedCompletionTimer = null;
-let playbackDurationMs = FALLBACK_AUDIO_DURATION_MS;
+let audioDurationMs = FALLBACK_AUDIO_DURATION_MS;
+let testimonialVideoDurationMs = TESTIMONIAL_FALLBACK_VIDEO_DURATION_MS;
+let playbackDurationMs =
+  QUOTE_EXIT_START_TIME_MS + QUOTE_EXIT_DURATION_MS + FINALE_DARK_BG_HOLD_MS;
 let timelineElapsedMs = 0;
 let timelineStartedAt = null;
 let timelineAnimationFrame = null;
@@ -139,6 +156,16 @@ let introBackdropFadeTimer = null;
 let outroVisibilityAnimationFrame = null;
 let hasOutroStarted = false;
 let hasOutroTextRevealed = false;
+let hasTestimonialStarted = false;
+let testimonialPlayPending = false;
+let hasQuoteStarted = false;
+let hasQuoteRevealed = false;
+let hasQuoteExiting = false;
+let hasFinaleBackdropStarted = false;
+let hasFinaleBrandStarted = false;
+let quoteVisibilityAnimationFrame = null;
+let finaleBackdropAnimationFrame = null;
+let finaleBrandAnimationFrame = null;
 let audioUnlockPending = false;
 let audioUnlockGestureBound = false;
 
@@ -152,6 +179,42 @@ function getOutroTextRevealTimeMs() {
 
 function getOutroStatRevealTimeMs() {
   return getOutroTextRevealTimeMs() + OUTRO_STAT_REVEAL_DELAY_MS;
+}
+
+function getTestimonialStartTimeMs() {
+  return audioDurationMs;
+}
+
+function getTestimonialVideoStartTimeMs() {
+  return getTestimonialStartTimeMs() + TESTIMONIAL_VIDEO_REVEAL_DELAY_MS;
+}
+
+function getQuoteSectionStartTimeMs() {
+  return QUOTE_START_TIME_MS + TESTIMONIAL_EXIT_DURATION_MS;
+}
+
+function getQuoteRevealTimeMs() {
+  return getQuoteSectionStartTimeMs() + QUOTE_REVEAL_DELAY_MS;
+}
+
+function getQuoteExitStartTimeMs() {
+  return QUOTE_EXIT_START_TIME_MS;
+}
+
+function getQuoteExitEndTimeMs() {
+  return getQuoteExitStartTimeMs() + QUOTE_EXIT_DURATION_MS;
+}
+
+function getFinaleBrandRevealTimeMs() {
+  return getQuoteExitEndTimeMs() + FINALE_BRAND_REVEAL_DELAY_MS;
+}
+
+function shouldShowEmbedAtTime(elapsed) {
+  return elapsed >= INTRO_SEQUENCE_DURATION_MS && elapsed < OUTRO_START_TIME_MS;
+}
+
+function updatePlaybackDuration() {
+  playbackDurationMs = getQuoteExitEndTimeMs() + FINALE_DARK_BG_HOLD_MS;
 }
 
 function buildOutroSlotDigits(targetDigit, spinCycles) {
@@ -280,7 +343,8 @@ function getTimelineElapsed(now = performance.now()) {
     demoAudio &&
     hasAudioSource() &&
     Number.isFinite(demoAudio.currentTime) &&
-    (!demoAudio.paused || demoAudio.ended)
+    !demoAudio.paused &&
+    !demoAudio.ended
   ) {
     return demoAudio.currentTime * 1000;
   }
@@ -305,6 +369,10 @@ function renderTimeline(now = performance.now()) {
   if (!isSeeking) {
     syncOutroPlayback(elapsed);
     syncOutroStatSlot(elapsed);
+    syncTestimonialPlayback(elapsed);
+    syncQuotePlayback(elapsed);
+    syncFinaleBackdrop(elapsed);
+    syncFinaleBrand(elapsed);
   }
   maybeExitEmbed(elapsed);
 
@@ -354,7 +422,6 @@ function hasAudioSource() {
 }
 
 function hasPlaybackFinished() {
-  if (demoAudio?.ended) return true;
   return timelineElapsedMs >= playbackDurationMs - 32;
 }
 
@@ -362,13 +429,18 @@ function syncAudioPlayback({ alignToTimeline = false } = {}) {
   if (!demoAudio || !hasAudioSource()) return;
 
   if (isAutoplaying) {
-    if (demoAudio.ended) {
-      demoAudio.currentTime = 0;
-    } else if (alignToTimeline && demoAudio.paused) {
-      const timelineSeconds = getTimelineElapsed() / 1000;
-      const maximumTime = Number.isFinite(demoAudio.duration)
-        ? demoAudio.duration
-        : timelineSeconds;
+    const timelineSeconds = getTimelineElapsed() / 1000;
+    const maximumTime = Number.isFinite(demoAudio.duration)
+      ? demoAudio.duration
+      : timelineSeconds;
+
+    if (Number.isFinite(maximumTime) && timelineSeconds >= maximumTime - 0.02) {
+      demoAudio.pause();
+      demoAudio.currentTime = maximumTime;
+      return;
+    }
+
+    if (demoAudio.ended || (alignToTimeline && demoAudio.paused)) {
       demoAudio.currentTime = Math.min(Math.max(timelineSeconds, 0), maximumTime);
     }
     demoAudio.muted = isMuted;
@@ -426,6 +498,7 @@ function renderMuteControl() {
   if (!muteToggle || !muteIcon) return;
 
   if (demoAudio) demoAudio.muted = isMuted;
+  if (testimonialVideo) testimonialVideo.muted = isMuted;
   muteIcon.src = isMuted ? "/video/assets/unmute.svg" : "/video/assets/mute.svg";
   muteToggle.setAttribute("aria-label", isMuted ? "Unmute audio" : "Mute audio");
   muteToggle.setAttribute("aria-pressed", String(isMuted));
@@ -434,7 +507,22 @@ function renderMuteControl() {
 function syncAudioDuration() {
   if (!demoAudio || !Number.isFinite(demoAudio.duration) || demoAudio.duration <= 0) return;
 
-  playbackDurationMs = demoAudio.duration * 1000;
+  audioDurationMs = demoAudio.duration * 1000;
+  updatePlaybackDuration();
+  renderTimeline();
+}
+
+function syncTestimonialVideoDuration() {
+  if (
+    !testimonialVideo ||
+    !Number.isFinite(testimonialVideo.duration) ||
+    testimonialVideo.duration <= 0
+  ) {
+    return;
+  }
+
+  testimonialVideoDurationMs = testimonialVideo.duration * 1000;
+  updatePlaybackDuration();
   renderTimeline();
 }
 
@@ -582,8 +670,16 @@ function setIntroState(batch, state, { replayReveal = false } = {}) {
     intro.setAttribute("aria-hidden", "true");
     intro.querySelectorAll(".video-intro__batch").forEach((batchElement) => {
       const batchNumber = Number(batchElement.dataset.batch);
+      const isPreviousBatch = batchNumber === batch - 1;
+
+      if (isPreviousBatch && batchElement.classList.contains("is-active")) {
+        batchElement.classList.remove("is-active");
+        batchElement.classList.add("is-exiting");
+        return;
+      }
+
       const shouldKeepExiting =
-        batchNumber === batch - 1 && batchElement.classList.contains("is-exiting");
+        isPreviousBatch && batchElement.classList.contains("is-exiting");
 
       batchElement.classList.remove("is-active");
       if (!shouldKeepExiting) {
@@ -700,6 +796,282 @@ function resetOutroPlayback() {
   syncOutroStatSlot(0);
 }
 
+function setTestimonialState(state) {
+  if (!testimonial) return;
+  testimonial.dataset.playbackState = state;
+  testimonial.setAttribute("aria-hidden", String(state === "hidden" || state === "exiting"));
+}
+
+function resetTestimonialPlayback() {
+  hasTestimonialStarted = false;
+  testimonialPlayPending = false;
+  setTestimonialState("hidden");
+
+  if (!testimonialVideo) return;
+  testimonialVideo.pause();
+  if (testimonialVideo.readyState >= HTMLMediaElement.HAVE_METADATA) {
+    testimonialVideo.currentTime = 0;
+  }
+}
+
+function syncTestimonialPlayback(elapsed, { forSeek = false } = {}) {
+  if (!testimonial) return;
+
+  const slideStart = getTestimonialStartTimeMs();
+  const videoStart = getTestimonialVideoStartTimeMs();
+  const videoEnd = Math.min(videoStart + testimonialVideoDurationMs, QUOTE_START_TIME_MS);
+
+  if (elapsed < slideStart) {
+    if (hasTestimonialStarted) resetTestimonialPlayback();
+    return;
+  }
+
+  if (elapsed >= QUOTE_START_TIME_MS) {
+    setTestimonialState(
+      hasTestimonialStarted && !forSeek && !prefersReducedMotion ? "exiting" : "hidden"
+    );
+    testimonialVideo?.pause();
+    return;
+  }
+
+  if (!hasTestimonialStarted) {
+    hasTestimonialStarted = true;
+    setTestimonialState(forSeek || prefersReducedMotion ? "visible" : "revealing");
+  } else if (forSeek || prefersReducedMotion) {
+    setTestimonialState("visible");
+  }
+
+  if (!testimonialVideo) return;
+
+  const hasMetadata = testimonialVideo.readyState >= HTMLMediaElement.HAVE_METADATA;
+  const targetSeconds = Math.max((elapsed - videoStart) / 1000, 0);
+
+  if (hasMetadata && (forSeek || Math.abs(testimonialVideo.currentTime - targetSeconds) > 0.25)) {
+    testimonialVideo.currentTime = Math.min(targetSeconds, testimonialVideo.duration);
+  }
+
+  const shouldPlay =
+    isAutoplaying && elapsed >= videoStart && elapsed < videoEnd && !testimonialVideo.ended;
+
+  if (!shouldPlay) {
+    testimonialVideo.pause();
+    return;
+  }
+
+  testimonialVideo.muted = isMuted;
+  if (!testimonialVideo.paused || testimonialPlayPending) return;
+
+  testimonialPlayPending = true;
+  const playAttempt = testimonialVideo.play();
+  if (playAttempt === undefined) {
+    testimonialPlayPending = false;
+    return;
+  }
+
+  playAttempt
+    .catch(() => {})
+    .finally(() => {
+      testimonialPlayPending = false;
+    });
+}
+
+function setQuoteState(state, { replayReveal = false } = {}) {
+  if (!quote) return;
+
+  if (quoteVisibilityAnimationFrame !== null) {
+    cancelAnimationFrame(quoteVisibilityAnimationFrame);
+    quoteVisibilityAnimationFrame = null;
+  }
+
+  const applyState = () => {
+    quote.dataset.playbackState = state;
+    quote.setAttribute("aria-hidden", String(state === "hidden"));
+  };
+
+  if (state === "revealing" && replayReveal && !prefersReducedMotion) {
+    quote.dataset.playbackState = "entering";
+    quote.setAttribute("aria-hidden", "false");
+    quoteVisibilityAnimationFrame = requestAnimationFrame(() => {
+      quoteVisibilityAnimationFrame = requestAnimationFrame(() => {
+        quoteVisibilityAnimationFrame = null;
+        applyState();
+      });
+    });
+    return;
+  }
+
+  applyState();
+}
+
+function resetQuotePlayback() {
+  hasQuoteStarted = false;
+  hasQuoteRevealed = false;
+  hasQuoteExiting = false;
+  setQuoteState("hidden");
+}
+
+function syncQuotePlayback(elapsed, { forSeek = false } = {}) {
+  if (!quote) return;
+
+  if (elapsed < getQuoteSectionStartTimeMs()) {
+    if (hasQuoteStarted || hasQuoteRevealed || hasQuoteExiting) resetQuotePlayback();
+    return;
+  }
+
+  if (elapsed >= getQuoteExitStartTimeMs()) {
+    if (elapsed >= getQuoteExitEndTimeMs()) {
+      if (hasQuoteStarted || hasQuoteRevealed || hasQuoteExiting) {
+        hasQuoteStarted = false;
+        hasQuoteRevealed = false;
+        hasQuoteExiting = false;
+        setQuoteState("hidden");
+      }
+      return;
+    }
+
+    if (!hasQuoteExiting) {
+      hasQuoteExiting = true;
+      setQuoteState(forSeek || prefersReducedMotion ? "hidden" : "exiting");
+    }
+    return;
+  }
+
+  if (hasQuoteExiting) {
+    hasQuoteExiting = false;
+  }
+
+  if (!hasQuoteStarted) {
+    hasQuoteStarted = true;
+    setQuoteState("entering");
+  }
+
+  if (elapsed < getQuoteRevealTimeMs()) {
+    if (hasQuoteRevealed) {
+      hasQuoteRevealed = false;
+      setQuoteState("entering");
+    }
+    return;
+  }
+
+  if (hasQuoteRevealed) {
+    if (forSeek || prefersReducedMotion) setQuoteState("visible");
+    return;
+  }
+
+  hasQuoteRevealed = true;
+  setQuoteState(forSeek || prefersReducedMotion ? "visible" : "revealing", {
+    replayReveal: !forSeek,
+  });
+}
+
+function setFinaleBackdropState(state, { replayEntrance = false } = {}) {
+  if (!finaleBackdrop) return;
+
+  if (finaleBackdropAnimationFrame !== null) {
+    cancelAnimationFrame(finaleBackdropAnimationFrame);
+    finaleBackdropAnimationFrame = null;
+  }
+
+  const applyState = () => {
+    finaleBackdrop.dataset.backdropState = state;
+    finaleBackdrop.setAttribute("aria-hidden", String(state === "hidden"));
+  };
+
+  if (state === "visible" && replayEntrance && !prefersReducedMotion) {
+    finaleBackdrop.dataset.backdropState = "hidden";
+    finaleBackdrop.setAttribute("aria-hidden", "true");
+    finaleBackdropAnimationFrame = requestAnimationFrame(() => {
+      finaleBackdropAnimationFrame = requestAnimationFrame(() => {
+        finaleBackdropAnimationFrame = null;
+        applyState();
+      });
+    });
+    return;
+  }
+
+  applyState();
+}
+
+function resetFinaleBackdrop() {
+  hasFinaleBackdropStarted = false;
+  setFinaleBackdropState("hidden");
+}
+
+function syncFinaleBackdrop(elapsed, { forSeek = false } = {}) {
+  if (!finaleBackdrop) return;
+
+  if (elapsed < getQuoteExitStartTimeMs()) {
+    if (hasFinaleBackdropStarted) resetFinaleBackdrop();
+    return;
+  }
+
+  if (!hasFinaleBackdropStarted) {
+    hasFinaleBackdropStarted = true;
+    setFinaleBackdropState("visible", {
+      replayEntrance: !forSeek && !prefersReducedMotion,
+    });
+    return;
+  }
+
+  if (forSeek || prefersReducedMotion) {
+    setFinaleBackdropState("visible");
+  }
+}
+
+function setFinaleBrandState(state, { replayReveal = false } = {}) {
+  if (!finaleBrand) return;
+
+  if (finaleBrandAnimationFrame !== null) {
+    cancelAnimationFrame(finaleBrandAnimationFrame);
+    finaleBrandAnimationFrame = null;
+  }
+
+  const applyState = () => {
+    finaleBrand.dataset.playbackState = state;
+    finaleBrand.setAttribute("aria-hidden", String(state === "hidden"));
+  };
+
+  if (state === "revealing" && replayReveal && !prefersReducedMotion) {
+    finaleBrand.dataset.playbackState = "hidden";
+    finaleBrand.setAttribute("aria-hidden", "true");
+    finaleBrandAnimationFrame = requestAnimationFrame(() => {
+      finaleBrandAnimationFrame = requestAnimationFrame(() => {
+        finaleBrandAnimationFrame = null;
+        applyState();
+      });
+    });
+    return;
+  }
+
+  applyState();
+}
+
+function resetFinaleBrand() {
+  hasFinaleBrandStarted = false;
+  setFinaleBrandState("hidden");
+}
+
+function syncFinaleBrand(elapsed, { forSeek = false } = {}) {
+  if (!finaleBrand) return;
+
+  if (elapsed < getFinaleBrandRevealTimeMs()) {
+    if (hasFinaleBrandStarted) resetFinaleBrand();
+    return;
+  }
+
+  if (!hasFinaleBrandStarted) {
+    hasFinaleBrandStarted = true;
+    setFinaleBrandState(forSeek || prefersReducedMotion ? "visible" : "revealing", {
+      replayReveal: !forSeek && !prefersReducedMotion,
+    });
+    return;
+  }
+
+  if (forSeek || prefersReducedMotion) {
+    setFinaleBrandState("visible");
+  }
+}
+
 function startEmbedOutroExit() {
   if (!frameStage || !frameShell) return;
 
@@ -715,6 +1087,11 @@ function startEmbedOutroExit() {
 
 function syncOutroPlayback(elapsed, { forSeek = false } = {}) {
   if (elapsed < OUTRO_START_TIME_MS) {
+    if (hasOutroStarted || hasOutroTextRevealed) resetOutroPlayback();
+    return;
+  }
+
+  if (elapsed >= getTestimonialStartTimeMs()) {
     if (hasOutroStarted || hasOutroTextRevealed) resetOutroPlayback();
     return;
   }
@@ -764,12 +1141,16 @@ function seekPlayback(milliseconds, { syncVisual = true } = {}) {
     const isIntroTime = targetTime < INTRO_SEQUENCE_DURATION_MS;
     hasIntroCompleted = !isIntroTime;
     isEmbedSequenceComplete = targetTime >= VISUAL_SEQUENCE_COMPLETE_TIME_MS;
-    hasEmbedExited = targetTime >= playbackDurationMs - EMBED_EXIT_LEAD_MS;
+    hasEmbedExited = targetTime >= OUTRO_START_TIME_MS;
     applyFeature(getFeatureAtTime(targetTime));
     syncIntroForSeek(targetTime);
-    setEmbedVisible(!isIntroTime && !hasEmbedExited);
+    setEmbedVisible(shouldShowEmbedAtTime(targetTime));
     syncOutroPlayback(targetTime, { forSeek: true });
     syncOutroStatSlot(targetTime, { instant: true });
+    syncTestimonialPlayback(targetTime, { forSeek: true });
+    syncQuotePlayback(targetTime, { forSeek: true });
+    syncFinaleBackdrop(targetTime, { forSeek: true });
+    syncFinaleBrand(targetTime, { forSeek: true });
   }
 
   renderTimeline();
@@ -1001,6 +1382,18 @@ function stopAutoplay({ resetTimeline = false } = {}) {
     window.clearTimeout(introBackdropFadeTimer);
     introBackdropFadeTimer = null;
   }
+  if (quoteVisibilityAnimationFrame !== null) {
+    cancelAnimationFrame(quoteVisibilityAnimationFrame);
+    quoteVisibilityAnimationFrame = null;
+  }
+  if (finaleBackdropAnimationFrame !== null) {
+    cancelAnimationFrame(finaleBackdropAnimationFrame);
+    finaleBackdropAnimationFrame = null;
+  }
+  if (finaleBrandAnimationFrame !== null) {
+    cancelAnimationFrame(finaleBrandAnimationFrame);
+    finaleBrandAnimationFrame = null;
+  }
 
   if (embedCompletionResolver) {
     const resolve = embedCompletionResolver;
@@ -1026,6 +1419,10 @@ function startAutoplay({ restartCycle = false } = {}) {
     isEmbedSequenceComplete = false;
     hasEmbedExited = false;
     resetOutroPlayback();
+    resetTestimonialPlayback();
+    resetQuotePlayback();
+    resetFinaleBackdrop();
+    resetFinaleBrand();
     timelineElapsedMs = 0;
     if (demoAudio && hasAudioSource()) {
       demoAudio.currentTime = 0;
@@ -1049,8 +1446,10 @@ function startAutoplay({ restartCycle = false } = {}) {
   }
 
   hideIntro();
-  if (!hasEmbedExited) {
+  if (shouldShowEmbedAtTime(timelineElapsedMs)) {
     setEmbedVisible(true, { replayEntrance: shouldRestart });
+  } else {
+    setEmbedVisible(false);
   }
   void runAutoplay(playbackRunId, { fromStart: shouldRestart });
 }
@@ -1061,6 +1460,10 @@ function setFeature(feature) {
   isEmbedSequenceComplete = false;
   hasEmbedExited = false;
   resetOutroPlayback();
+  resetTestimonialPlayback();
+  resetQuotePlayback();
+  resetFinaleBackdrop();
+  resetFinaleBrand();
   hideIntro();
   setEmbedVisible(true);
   applyFeature(feature);
@@ -1209,11 +1612,13 @@ muteToggle?.addEventListener("click", () => {
 demoAudio?.addEventListener("loadedmetadata", syncAudioDuration);
 demoAudio?.addEventListener("durationchange", syncAudioDuration);
 demoAudio?.addEventListener("ended", () => {
-  hasEmbedExited = true;
-  hideIntro();
-  setEmbedVisible(false);
-  stopAutoplay();
+  timelineElapsedMs = audioDurationMs;
+  timelineStartedAt = isAutoplaying ? performance.now() : null;
+  renderTimeline();
 });
+
+testimonialVideo?.addEventListener("loadedmetadata", syncTestimonialVideoDuration);
+testimonialVideo?.addEventListener("durationchange", syncTestimonialVideoDuration);
 
 window.videoDemo = {
   getFeature: () => currentFeature,
@@ -1224,6 +1629,7 @@ window.videoDemo = {
 };
 
 applyFeature(currentFeature);
+updatePlaybackDuration();
 renderTimeline();
 renderPlaybackControl();
 renderMuteControl();
